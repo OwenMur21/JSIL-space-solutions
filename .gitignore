@@ -1,0 +1,6 @@
+virtual/
+space/migrations/
+.vscode
+jsil/__pycache__/
+space/__pycache__/
+space/migrations/__pycache__/
