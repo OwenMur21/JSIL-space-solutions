@@ -1,2 +1,15 @@
-<h1> Captain marvel </h1>
+{% extends 'base.html' %} 
+{% load bootstrap3 %}
 
+
+{% block styles%}
+{{block.super}}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+<h1>Captain Marvel</h1>
+</div>
+
+{% endblock %}
