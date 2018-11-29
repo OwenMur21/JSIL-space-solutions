@@ -41,7 +41,28 @@ INSTALLED_APPS = [
     'space',
     'bootstrap3',
     'bootstrap4',
+    'social_django',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
 ]
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+
+LOGIN_REDIRECT_URL = 'landing'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '644850949568-qmma6vbh0oodkgu9ag9moc72fh1e655j.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'VvvRv5ieAh5QxSC3LiD5pDup'
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdCmX0UAAAAAPmXYKjXylVLnuPAsg4t-JiegX22'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '489618718192490'
+SOCIAL_AUTH_FACEBOOK_SECRET = '0c1ddcd792655cc1ec695eb1a7b8a545'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'jsil.urls'
@@ -67,6 +89,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -102,6 +126,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
