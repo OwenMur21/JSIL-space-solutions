@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^oauth/', include('social_django.urls',namespace="social")),
     url(r'^accounts/', include('allauth.urls')),
+
 ]
