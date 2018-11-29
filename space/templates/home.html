@@ -1,15 +1,32 @@
 {% extends 'base.html' %} 
+{% load static %}
 {% load bootstrap3 %}
-
+{% load bootstrap4 %}
 
 {% block styles%}
 {{block.super}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
 {% endblock %}
 
 {% block content %}
-
-<div class="jumbotron">
-<h1>Captain Marvel</h1>
-</div>
-
+<body>
+<div class="container-fluid">
+    <!-- head section -->
+        <div class="container">
+                <div class="row" style="background:white !important;">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                     <img src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg" class="img-responsive" alt="JSIL" style="width:350px !important;height:215px !important;">
+                    </div>   
+                                     
+                    
+                    </div>
+          
+            </div>
+            <!-- end of head section -->
+            
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% endblock %}
