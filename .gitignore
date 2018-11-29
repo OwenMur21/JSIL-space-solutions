@@ -4,3 +4,4 @@ space/migrations/
 jsil/__pycache__/
 space/__pycache__/
 space/migrations/__pycache__/
+.env
