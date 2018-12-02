@@ -11,7 +11,7 @@ class SignupForm(UserCreationForm):
 
 class ImageForm(forms.ModelForm):
     class Meta:
-        model = Image
+        model = Product
         exclude =['posted_on','likes','user',]
 
 class CommentForm(forms.ModelForm):
