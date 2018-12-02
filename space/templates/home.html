@@ -5,20 +5,22 @@
 {% block content %}
 <body>
     <div class="container-fluid">
-        <!-- head section -->
+        <!-- products section -->
         <div class="container" style="padding-top:150px !important;">
             <br>
-
-                     <div class="row">
-                {% for image in images %}
+            
+            <div class="row">
+                {% for product in products %}
                 <div class="col-xs-12 col-sm-6 col-md-4 products">
                     
                     
                     <div class="thumbnail" style="width:100% !important;height: 100% !important;" >
-                        <figure class="product-images" style="box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.8), 0 7px 20px 0 rgba(0, 0, 0, 0.21) !important;">
-                            <img src="{{image.post.url}}" class = "img-responsive imagee" style="height:400px;width: 100% !important;position: center;size: cover;" alt=""/>
+                        <figure class="product-images" style="box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4), 0 3px 17px 0 rgba(0, 0, 0, 0.18) !important;">
+                            <img src="{{product.post.url}}" class = "img-responsive imagee" style="height:400px;width: 100% !important;position: center;size: cover;" alt=""/>
                             <figcaption>
-                                <h4 style="color:white;font-size: 20px;"><span>{{image.name}}</span></h4>
+                                <h4 style="color:white;font-size: 19px;bottom: 20px;"><span>{{product.name}}</span></h4>
+                                <h4 style="color:white;font-size: 19px;top: 324px;"><span>Ksh.{{product.price}}</span></h4>
+                                
                                 <p>
                                     <a href="#"><i class="fas fa-cart-arrow-down"></i></a>
                                     <a href="#"><i class="fa fa-fw fa-heart"></i></a>
@@ -31,10 +33,10 @@
                 {% endfor %}        
             </div>
         </div>
-    
         
         
-        <!-- end of head section -->
+        
+        <!-- end of products section -->
         
     </div>
 </body>
@@ -43,7 +45,7 @@
     .clearfix:after { clear: both; }
     
     body {
-        background: whitesmoke;
+        background: rgb(231, 231, 231);
         color: black;
         font-weight: 400;
         font-size: 1em;
@@ -91,7 +93,7 @@
     .thumbnail img {
         height: 450px !important;
         width: 400px !important;
-        }
+    }
     /* Common style */
     .thumbnail figure {
         position: relative;
@@ -119,7 +121,6 @@
     .thumbnail figure figcaption {
         padding: 2em;
         color: whitesmoke;
-        text-transform: uppercase;
         font-size: 1.30em;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
@@ -168,7 +169,7 @@
         font-size: 68.5%;
     }
     
-
+    
     figure.product-images figcaption {
         padding: 1em;
     }
