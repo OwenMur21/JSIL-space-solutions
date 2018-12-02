@@ -74,7 +74,7 @@ def signup(request):
 
 @login_required(login_url='/accounts/login/')
 def comment(request, product_id):
-    products = get_object_or_404(Image, pk=product_id)
+    products = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -94,3 +94,8 @@ def like(request, product_id):
 
     return redirect('landing')
 
+
+@login_required(login_url='/accounts/login/')
+def about(request):
+
+    return render(request,'about_us.html')
