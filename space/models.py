@@ -3,9 +3,9 @@ import datetime as dt
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Image(models.Model):
+class Product(models.Model):
     '''
-    class that contains image properties,methods and functions
+    class that contains product properties,methods and functions
     '''
     post = models.ImageField(upload_to='images/')
     name = models.CharField(max_length=40)
@@ -16,29 +16,29 @@ class Image(models.Model):
     def __str__(self):
       return self.name
 
-    def save_image(self):
+    def save_product(self):
         self.save
 
-    def delete_image(self):
+    def delete_product(self):
         self.delete
 
     class Meta:
         ordering = ['posted_on']
 
     @classmethod
-    def get_all_images(cls):
-        images = cls.objects.order_by()
-        return images
+    def get_all_products(cls):
+        products = cls.objects.order_by()
+        return products
 
     @classmethod
-    def get_image_by_id(cls, id):
-        image = Image.objects.filter(user_id=id).all()
-        return image
+    def get_product_by_id(cls, id):
+        product = Product.objects.filter(user_id=id).all()
+        return product
 
     @classmethod
-    def search_images(cls,name):
-        image =  cls.objects.filter(name__icontains=name)
-        return image
+    def search_product(cls,name):
+        product =  cls.objects.filter(name__icontains=name)
+        return product
 
     @property
     def count_likes(self):
@@ -57,7 +57,7 @@ class Comment(models.Model):
         """
         comment = models.TextField()
         posted_on = models.DateTimeField(auto_now=True)
-        image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comment')
+        product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comment')
         user = models.ForeignKey(User, on_delete=models.CASCADE,null="True")
 
         def __str__(self):
@@ -73,14 +73,14 @@ class Comment(models.Model):
                 self.delete()
 
         @classmethod
-        def get_comments_by_image_id(cls, image):
-                comments = Comment.objects.get(image_id=image)
+        def get_comments_by_product_id(cls, product):
+                comments = Comment.objects.get(product_id=product)
                 return comments
 
 
 class Likes(models.Model):
     who_liked=models.ForeignKey(User,on_delete=models.CASCADE, related_name='likes')
-    liked_image =models.ForeignKey(Image, on_delete=models.CASCADE, related_name='likes')
+    liked_product =models.ForeignKey(Product, on_delete=models.CASCADE, related_name='likes')
 
     def save_like(self):
         self.save() 
