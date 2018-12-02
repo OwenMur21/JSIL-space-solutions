@@ -10,9 +10,8 @@
   <div class="collapse navbar-collapse "  id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto navigations" >
         <a class="sections"  href="/"><button class="btn btn-sm">Home</button></a>
-        <a class="sections" href=""><button class="btn btn-sm">Products</button></a>
-        <a class="sections" href=""><button class="btn btn-sm">Purpose</button></a>
-        <a class="sections" href=""><button class="btn btn-sm">Mission</button></a>
+        <a class="sections" href="#products"><button class="btn btn-sm">Products</button></a>
+        <a class="sections" href="{% url 'about' %}"><button class="btn btn-sm">About Us</button></a>
         <a class="sections"  href=""><button class="btn btn-sm">Contacts</button></a>
     </ul>
     <p style="font-size:21px;color:white;font-weight:bold;margin-right: 40px;margin-top: 15px;"><i class="fas fa-user"></i>&nbsp;{{user.username}}</p>
@@ -31,6 +30,7 @@
   @import url('https://fonts.googleapis.com/css?family=Nunito|Oleo+Script+Swash+Caps');
   
   .navbar{
+    box-shadow: 0 7px 7px 0 rgba(0, 0, 0, 0.2), 0 12px 18px 0 rgba(0, 0, 0, 0.06) !important;
     background: rgb(94, 45, 114) !important;
     font-family: 'Raleway', sans-serif;
     width: 100%;
