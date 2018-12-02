@@ -5,8 +5,8 @@ from django.conf.urls.static import static
 
 urlpatterns=[
   url('^$',views.landing,name = 'landing'),
-  url(r'^comment/(?P<image_id>\d+)', views.comment, name='comment'),
-  url(r'^like/(?P<image_id>\d+)', views.like, name='like'),
+  url(r'^comment/(?P<product_id>\d+)', views.comment, name='comment'),
+  url(r'^like/(?P<product_id>\d+)', views.like, name='like'),
 
 ]
 
