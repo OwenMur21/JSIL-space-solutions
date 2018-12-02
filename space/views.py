@@ -22,7 +22,7 @@ from django.http import JsonResponse
 
 
 def landing(request):
-    images = Image.objects.all()
+    products = Product.objects.all()
     comments = Comment.objects.all()
     likes = Likes.objects.all()
     return render(request, 'home.html',locals())
@@ -73,23 +73,23 @@ def signup(request):
     return render(request, 'registration/registration_form.html', {'form': form})
 
 @login_required(login_url='/accounts/login/')
-def comment(request, image_id):
-    images = get_object_or_404(Image, pk=image_id)
+def comment(request, product_id):
+    products = get_object_or_404(Image, pk=product_id)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.user = request.user
-            comment.image = images
+            comment.product = products
             comment.save()
     return redirect('landing')
 
 
 @login_required(login_url='/accounts/login/')
-def like(request, image_id):
+def like(request, product_id):
     current_user = request.user
-    liked_image=Image.objects.get(id=image_id)
-    new_like,created= Likes.objects.get_or_create(who_liked=current_user, liked_image=liked_image)
+    liked_product=Product.objects.get(id=product_id)
+    new_like,created= Likes.objects.get_or_create(who_liked=current_user, liked_product=liked_product)
     new_like.save()
 
     return redirect('landing')
