@@ -9,7 +9,7 @@
         <div class="container" style="padding-top:150px !important;">
             <br>
             
-            <div class="row">
+            <div class="row"  id="products">
                 {% for product in products %}
                 <div class="col-xs-12 col-sm-6 col-md-4 products">
                     
@@ -18,28 +18,98 @@
                         <figure class="product-images" style="box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4), 0 3px 17px 0 rgba(0, 0, 0, 0.18) !important;">
                             <img src="{{product.post.url}}" class = "img-responsive imagee" style="height:400px;width: 100% !important;position: center;size: cover;" alt=""/>
                             <figcaption>
-                                <h4 style="color:white;font-size: 19px;bottom: 20px;"><span>{{product.name}}</span></h4>
-                                <h4 style="color:white;font-size: 19px;top: 324px;"><span>Ksh.{{product.price}}</span></h4>
-                                
+                                <h4 style="color:white;font-size: 19px;bottom: 4px;"><span>{{product.name}}</span></h4>                                
                                 <p>
-                                    <a href="#"><i class="fas fa-cart-arrow-down"></i></a>
-                                    <a href="#"><i class="fa fa-fw fa-heart"></i></a>
-                                    <a href="#"><i class="fas fa-comment"></i></a>
+                                    <a id="eye" data-toggle="modal" data-target="#modalQuickView{{product.id}}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View more details"></i></a>
+                                    <a href="#"><i class="fa fa-fw fa-heart"  data-toggle="tooltip" data-placement="top" title="Like"></i></a>
+                                    <a href="#"><i class="fas fa-comment"  data-toggle="tooltip" data-placement="top" title="Comment"></i></a>
                                 </p>
                             </figcaption>			
                         </figure>
                     </div> 
+                    <!-- Modal: modalQuickView -->
+                    <div class="modal fade" id="modalQuickView{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <!--Carousel Wrapper-->
+                                        <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+                                            <!--Slides-->
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <img class="d-block w-100" src="{{product.post.url}}" style="height:100% !important;"
+                                                    alt="First slide">
+                                                </div>
+                                            </div>
+                                                    </div>
+                                                    <!--/.Carousel Wrapper-->
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <h2 class="h2-responsive product-name">
+                                                        <strong>{{product.name}}</strong>
+                                                    </h2>
+                                                    <h4 class="h4-responsive">
+                                                        <span class="green-text">
+                                                            <strong>Ksh.{{product.price}}</strong>
+                                                        </span>
+                                                    </h4>
+                                                    <h5 class="h5-responsive">
+                                                            <span class="green-text">
+                                                                <strong>{{product.posted_on}}</strong>
+                                                            </span>
+                                                        </h5>
+                                       
+                            
+                            <!-- Add to Cart -->
+                            <div class="card-body">
+                                <div class="row">
+                                   
+                              {{product.description}}
+                                </div>
+                                <br>
+                                <span>
+                                    <i class="fas fa-comments"></i>&nbsp;<span>{{product.comment.count}} comment(s)</span>
+                                    <br>
+                                    <i class="fas fa-heart"></i>&nbsp;<span>{{product.count_likes}} likes</span>
+                                </span>
+                                <br>
+                          
+                                <div class="text-right">
+                                    
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-success">Add to cart
+                                        <i class="fa fa-cart-plus ml-2" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.Add to Cart -->
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}        
             </div>
         </div>
-        
-        
-        
-        <!-- end of products section -->
-        
     </div>
+    
+</div>
+{% endfor %}        
+</div>
+</div>
+
+
+
+<!-- end of products section -->
+
+</div>
 </body>
+<script>
+    // Material Select Initialization
+    $(document).ready(function() {
+        $('.mdb-select').materialSelect();
+    });
+</script>
 <style>*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
     .clearfix:before, .clearfix:after { display: table; content: ''; }
     .clearfix:after { clear: both; }
@@ -297,6 +367,11 @@
     .imagee{
         width: 100% !important;
     }
+    #eye:hover{
+        color: rgb(94, 45, 114) !important;
+
+    }
+    
 </style>
 
 {% block scripts %} {{block.super}}
