@@ -1,0 +1,261 @@
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+    .clearfix:before, .clearfix:after { display: table; content: ''; }
+    .clearfix:after { clear: both; }
+    
+    body {
+        background: rgb(231, 231, 231);
+        color: black;
+        font-weight: 400;
+        font-size: 1em;
+        font-family: 'Raleway', Arial, sans-serif;
+    }
+    
+    a {
+        outline: none;
+        color: #3498db;
+        text-decoration: none;
+    }
+    
+    a:hover, a:focus {
+        color: #528cb3;
+    }
+    
+    section {
+        padding: 1em;
+        text-align: center;
+    }
+    
+    .content {
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+    
+    .content > h2 {
+        clear: both;
+        margin: 0;
+        padding: 4em 1% 0;
+        color: #484B54;
+        font-weight: 800;
+        font-size: 1.5em;
+    }
+    
+    .content > h2:first-child {
+        padding-top: 0em;
+    }
+    
+    .thumbnail {
+        height: 450px !important;
+        width: 400px !important;
+        overflow: hidden !important;
+    }
+    .thumbnail img {
+        height: 450px !important;
+        width: 400px !important;
+    }
+    /* Common style */
+    .thumbnail figure {
+        position: relative;
+        float: left;
+        overflow: hidden;
+        margin: 10px 1%;
+        min-width: 320px;
+        max-width: 480px;
+        max-height: 360px;
+        width: 48%;
+        height: auto;
+        background: #3085a3;
+        text-align: center;
+        cursor: pointer;
+    }
+    
+    .thumbnail figure img {
+        position: relative;
+        display: block;
+        min-height: 100%;
+        max-width: 100%;
+        opacity: 0.8;
+    }
+    
+    .thumbnail figure figcaption {
+        padding: 2em;
+        color: whitesmoke;
+        font-size: 1.30em;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    .thumbnail figure figcaption::before,
+    .thumbnail figure figcaption::after {
+        pointer-events: none;
+    }
+    
+    .thumbnail figure figcaption,
+    .thumbnail figure figcaption > a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Anchor will cover the whole item by default */
+    /* For some effects it will show as a button */
+    .thumbnail figure figcaption > a {
+        z-index: 1000;
+        text-indent: 200%;
+        white-space: nowrap;
+        font-size: 0;
+        opacity: 0;
+    }
+    
+    .thumbnail figure h4 {
+        word-spacing: -0.15em;
+        font-weight: 300;
+    }
+    
+    .thumbnail figure h4 span {
+        font-weight: 800;
+    }
+    
+    .thumbnail figure h4,
+    .thumbnail figure p {
+        margin: 0;
+    }
+    
+    .thumbnail figure p {
+        letter-spacing: 1px;
+        font-size: 68.5%;
+    }
+    
+    
+    figure.product-images figcaption {
+        padding: 1em;
+    }
+    
+    figure.product-images figcaption::before,
+    figure.product-images figcaption::after {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        border-style: solid;
+        border-color: rgb(211, 71, 94);
+        content: '';
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+    }
+    
+    figure.product-images figcaption::before {
+        right: 0;
+        bottom: 0;
+        border-width: 0 70px 60px 0;
+        -webkit-transform: translate3d(70px,60px,0);
+        transform: translate3d(70px,60px,0);
+    }
+    
+    figure.product-images figcaption::after {
+        top: 0;
+        left: 0;
+        border-width: 15px 0 0 15px;
+        -webkit-transform: translate3d(-15px,-15px,0);
+        transform: translate3d(-15px,-15px,0);
+    }
+    
+    figure.product-images img,
+    figure.product-images p a {
+        -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+        transition: opacity 0.35s, transform 0.35s;
+    }
+    
+    figure.product-images img {
+        opacity: 0.85;
+    }
+    
+    figure.product-images h4 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 0.4em 10px;
+        width: 50%;
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+        -webkit-transform: translate3d(100%,0,0);
+        transform: translate3d(100%,0,0);
+    }
+    
+    @media screen and (max-width: 920px) {
+        figure.product-images h4 {
+            padding: 0.75em 10px;
+            font-size: 120%;
+        }
+    }
+    
+    figure.product-images p {
+        float: right;
+        clear: both;
+        text-align: left;
+        text-transform: none;
+        font-size: 111%;
+    }
+    
+    figure.product-images p a {
+        display: block;
+        margin-bottom: 1em;
+        color: #fff;
+        opacity: 0;
+        -webkit-transform: translate3d(90px,0,0);
+        transform: translate3d(90px,0,0);
+    }
+    
+    figure.product-images p a:hover,
+    figure.product-images p a:focus {
+        color: rgb(94, 45, 114);
+    }
+    
+    figure.product-images:hover figcaption::before,
+    figure.product-images:hover figcaption::after {
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+    
+    figure.product-images:hover img {
+        opacity: 0.6;
+        
+    }
+    
+    figure.product-images:hover h4,
+    figure.product-images:hover p a {
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+    
+    figure.product-images:hover p a {
+        opacity: 1;
+    }
+    
+    figure.product-images:hover p a:first-child {
+        -webkit-transition-delay: 0.025s;
+        transition-delay: 0.025s;
+    }
+    
+    figure.product-images:hover p a:nth-child(2) {
+        -webkit-transition-delay: 0.05s;
+        transition-delay: 0.05s;
+    }
+    
+    figure.product-images:hover p a:nth-child(3) {
+        -webkit-transition-delay: 0.075s;
+        transition-delay: 0.075s;
+    }
+    
+    figure.product-images:hover p a:nth-child(4) {
+        -webkit-transition-delay: 0.1s;
+        transition-delay: 0.1s;
+    }
+    
+    .imagee{
+        width: 100% !important;
+    }
+    #eye:hover{
+        color: rgb(94, 45, 114) !important;
+
+    }
