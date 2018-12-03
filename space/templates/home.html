@@ -26,8 +26,8 @@
                                 <h4 style="color:white;font-size: 19px;bottom: 4px;"><span>{{product.name}}</span></h4>                                
                                 <p>
                                     <a id="eye" data-toggle="modal" data-target="#modalQuickView{{product.id}}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View more details"></i></a>
-                                    <a href="#"><i class="fa fa-fw fa-heart"  data-toggle="tooltip" data-placement="top" title="Like"></i></a>
-                                    <a href="#"><i class="fas fa-comment"  data-toggle="tooltip" data-placement="top" title="Comment"></i></a>
+                                    <a href="/like/{{product.id}}"><i class="fa fa-fw fa-heart"  data-toggle="tooltip" data-placement="top" title="Like"></i></a>
+                                    <a href="/comment/{{product.id}}"><i class="fas fa-comment"  data-toggle="tooltip" data-placement="top" title="Comment"></i></a>
                                 </p>
                             </figcaption>			
                         </figure>
