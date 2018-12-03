@@ -95,7 +95,5 @@ def like(request, product_id):
     return redirect('landing')
 
 
-@login_required(login_url='/accounts/login/')
 def about(request):
-
-    return render(request,'about_us.html')
+    return render(request, 'about_us.html')
