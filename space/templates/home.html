@@ -105,7 +105,6 @@
                 <div class="logo-font jsil-sub-slogan">JSIL SPACE SOLUTIONS & Co. LTD</div>  
             </div>
             <br>
-<<<<<<< HEAD
             <br>
             <br>
             <br>
@@ -146,42 +145,6 @@
                                                         <img class="d-block w-100" src="{{product.post.url}}" style="height:100% !important;"
                                                         alt="First slide">
                                                     </div>
-=======
-            
-            <div class="row"  id="products">
-                {% for product in products %}
-                <div class="col-xs-12 col-sm-6 col-md-4 products">
-                    
-                    
-                    <div class="thumbnail" style="width:100% !important;height: 100% !important;" >
-                        <figure class="product-images" style="box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4), 0 3px 17px 0 rgba(0, 0, 0, 0.18) !important;">
-                            <img src="{{product.post.url}}" class = "img-responsive imagee" style="height:400px;width: 100% !important;position: center;size: cover;" alt=""/>
-                            <figcaption>
-                                <h4 style="color:white;font-size: 19px;bottom: 4px;"><span>{{product.name}}</span></h4>                                
-                                <p>
-                                    <a id="eye" data-toggle="modal" data-target="#modalQuickView{{product.id}}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View more details"></i></a>
-                                    <a href="/like/{{product.id}}"><i class="fa fa-fw fa-heart"  data-toggle="tooltip" data-placement="top" title="Like"></i></a>
-                                    <a href="/comment/{{product.id}}"><i class="fas fa-comment"  data-toggle="tooltip" data-placement="top" title="Comment"></i></a>
-                                </p>
-                            </figcaption>			
-                        </figure>
-                    </div> 
-                    <!-- Modal: modalQuickView -->
-                    <div class="modal fade" id="modalQuickView{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-lg-5">
-                                        <!--Carousel Wrapper-->
-                                        <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
-                                            <!--Slides-->
-                                            <div class="carousel-inner" role="listbox">
-                                                <div class="carousel-item active">
-                                                    <img class="d-block w-100" src="{{product.post.url}}" style="height:100% !important;"
-                                                    alt="First slide">
->>>>>>> 47963a1ea3e1a5c9ac870cd53e22936ee5682e76
                                                 </div>
                                             </div>
                                             <!--/.Carousel Wrapper-->
@@ -1093,7 +1056,7 @@
     }
     
 </style>
-{% block scripts %} {{block.super}}
 {% endblock %}
+{% block scripts %} {{block.super}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% endblock %}

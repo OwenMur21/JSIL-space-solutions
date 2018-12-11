@@ -18,3 +18,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = [ 'comment' ]
+
+class ComposeForm(forms.Form):
+    message = forms.CharField(
+            widget=forms.TextInput(
+                attrs={"class": "form-control"}
+                )
+            )
