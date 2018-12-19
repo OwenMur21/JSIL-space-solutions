@@ -97,5 +97,19 @@ def like(request, product_id):
 
 @login_required(login_url='/accounts/login/')
 def about(request):
-
     return render(request,'about_us.html')
+
+def my_profile(request):
+    my_user_profile = Profile.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    context = { 'my_orders': my_orders }
+    return render(request, "profile.html", context)
+
+
+
+
+
+
+    
+
+    
