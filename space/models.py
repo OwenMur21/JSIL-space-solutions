@@ -1,8 +1,17 @@
+from __future__ import unicode_literals
 from django.db import models
+from django.conf import settings
 import datetime as dt
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
+
+User = get_user_model()
 
 # Create your models here.
+
+
+
 class Product(models.Model):
     '''
     class that contains product properties,methods and functions
@@ -50,6 +59,23 @@ class Product(models.Model):
     def count_comments(self):
         comments = self.comments.count()
         return comments
+
+
+class Profile(models.Model):
+    """
+    Gives users a profile
+    """
+    user =models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    products =models.ManyToManyField(Product, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+def post_save_profile_create (sender, instance, created, *args, **kwargs):
+    if created:
+        Profile.objects.get_or_create(user=instance)
+
+post_save.connect(post_save_profile_create, sender=settings.AUTH_USER_MODEL)
 
 class Comment(models.Model):
         """
