@@ -85,9 +85,15 @@
                                 <div class="text-right">
                                     
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                     {% if product in user.profile.products.all %}
+                                    You own this
+                                    {% elif product in current_order_products %}
+                                     <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning">Go to Cart</a>
+{% else %}
                                     <button class="btn btn-success">Add to cart
                                         <i class="fa fa-cart-plus ml-2" aria-hidden="true"></i>
                                     </button>
+                                     {% endif %}
                                 </div>
                             </div>
                             <!-- /.Add to Cart -->
