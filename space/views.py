@@ -11,7 +11,6 @@ from django.conf import settings
 from django.contrib import messages
 from .forms import *
 from .models import *
-from .extras import *
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib import messages
 from django.conf import settings
@@ -168,56 +167,6 @@ def delete_from_cart(request, item_id):
         messages.info(request, "Item has been deleted")
     return redirect(reverse('order_summary'))
 
-@login_required()
-def checkout(request, **kwargs):
-    client_token = generate_client_token()
-    existing_order = get_user_pending_order(request)
-    publishKey = settings.STRIPE_PUBLISHABLE_KEY
-    if request.method == 'POST':
-        token = request.POST.get('stripeToken', False)
-        if token:
-            try:
-                charge = stripe.Charge.create(
-                    amount=100*existing_order.get_cart_total(),
-                    currency='usd',
-                    description='Example charge',
-                    source=token,
-                )
-
-                return redirect(reverse('shopping_cart:update_records',
-                        kwargs={
-                            'token': token
-                        })
-                    )
-            except stripe.CardError as e:
-                message.info(request, "Your card has been declined.")
-        else:
-            result = transact({
-                'amount': existing_order.get_cart_total(),
-                'payment_method_nonce': request.POST['payment_method_nonce'],
-                'options': {
-                    "submit_for_settlement": True
-                }
-            })
-
-            if result.is_success or result.transaction:
-                return redirect(reverse('shopping_cart:update_records',
-                        kwargs={
-                            'token': result.transaction.id
-                        })
-                    )
-            else:
-                for x in result.errors.deep_errors:
-                    messages.info(request, x)
-                return redirect(reverse('shopping_cart:checkout'))
-            
-    context = {
-        'order': existing_order,
-        'client_token': client_token,
-        'STRIPE_PUBLISHABLE_KEY': publishKey
-    }
-
-    return render(request, 'shopping_cart/checkout.html', context)
 
 
 
