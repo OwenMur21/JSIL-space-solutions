@@ -11,14 +11,14 @@ def generate_order_id():
     rand_str = "".join([random.choice(string.digits) for count in range(3)])
     return date_str + rand_str
 
-gateway = braintree.BraintreeGateway(
-    braintree.Configuration(
-        environment=settings.BT_ENVIRONMENT,
-        merchant_id=settings.BT_MERCHANT_ID,
-        public_key=settings.BT_PUBLIC_KEY,
-        private_key=settings.BT_PRIVATE_KEY
-    )
-)
+# gateway = braintree.BraintreeGateway(
+#     braintree.Configuration(
+#         environment=settings.BT_ENVIRONMENT,
+#         merchant_id=settings.BT_MERCHANT_ID,
+#         public_key=settings.BT_PUBLIC_KEY,
+#         private_key=settings.BT_PRIVATE_KEY
+#     )
+# )
 
 def generate_client_token():
     return gateway.client_token.generate()
