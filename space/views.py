@@ -26,6 +26,23 @@ from .models import Thread, ChatMessage
 
 from django.urls import reverse
 
+@login_required(login_url='/accounts/login/')
+def homepage(request):
+    products = Product.objects.all()
+    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
+    current_order_products = []
+    if filtered_orders.exists():
+    	user_order = filtered_orders[0]
+    	user_order_items = user_order.items.all()
+    	current_order_products = [product.product for product in user_order_items]
+
+    context = {
+        'products': products,
+        'current_order_products': current_order_products
+         }
+    comments = Comment.objects.all()
+    likes = Likes.objects.all()
+    return render(request, 'home.html',locals())
 
 def get_user_pending_order(request):
     # get order for the correct user
