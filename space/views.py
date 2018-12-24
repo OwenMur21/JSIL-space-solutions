@@ -24,12 +24,32 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Thread, ChatMessage
 
 
+from django.urls import reverse
 
 
+def get_user_pending_order(request):
+    # get order for the correct user
+    user_profile = get_object_or_404(Profile, user=request.user)
+    order = Order.objects.filter(owner=user_profile, is_ordered=False)
+    if order.exists():
+        # get the only order in the list of filtered orders
+        return order[0]
+    return 0
 
 
 def landing(request):
     products = Product.objects.all()
+    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
+    current_order_products = []
+    if filtered_orders.exists():
+    	user_order = filtered_orders[0]
+    	user_order_items = user_order.items.all()
+    	current_order_products = [product.product for product in user_order_items]
+
+    context = {
+        'products': products,
+        'current_order_products': current_order_products
+         }
     comments = Comment.objects.all()
     likes = Likes.objects.all()
     return render(request, 'home.html',locals())
@@ -102,45 +122,61 @@ def like(request, product_id):
     return redirect('landing')
 
 
-class InboxView(LoginRequiredMixin, ListView):
-    template_name = 'chat/inbox.html'
-    def get_queryset(self):
-        return Thread.objects.by_user(self.request.user)
+@login_required(login_url='/accounts/login/')
+def about(request):
+    return render(request,'about_us.html')
+
+def my_profile(request):
+    my_user_profile = Profile.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    context = { 'my_orders': my_orders }
+    return render(request, "profile.html", context)
+
+@login_required()
+def order_details(request, **kwargs):
+    existing_order = get_user_pending_order(request)
+    context = {
+        'order': existing_order
+    }
+    return render(request, 'order_summary.html', context)
 
 
-class ThreadView(LoginRequiredMixin, FormMixin, DetailView):
-    template_name = 'chat/thread.html'
-    form_class = ComposeForm
-    success_url = './'
+@login_required()
+def add_to_cart(request, **kwargs):
+    # get the user profile
+    user_profile = get_object_or_404(Profile, user=request.user)
+    # filter products by id
+    product = Product.objects.filter(id=kwargs.get('item_id', "")).first()
+    # check if the user already owns this product
+    if product in request.user.profile.products.all():
+        messages.info(request, 'You already own this product')
+        return redirect(reverse('landing')) 
+    # create orderItem of the selected product
+    order_item, status = OrderItem.objects.get_or_create(product=product)
+    # create order associated with the user
+    user_order, status = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
+    user_order.items.add(order_item)
+    if status:
+        # generate a reference code
+        user_order.ref_code = generate_order_id()
+        user_order.save()
 
-    def get_queryset(self):
-        return Thread.objects.by_user(self.request.user)
+    # show confirmation message and redirect back to the same page
+    messages.info(request, "item added to cart")
+    return redirect(reverse('landing'))
 
-    def get_object(self):
-        other_username  = self.kwargs.get("username")
-        obj, created    = Thread.objects.get_or_new(self.request.user, other_username)
-        if obj == None:
-            raise Http404
-        return obj
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.get_form()
-        return context
+@login_required()
+def delete_from_cart(request, item_id):
+    item_to_delete = OrderItem.objects.filter(pk=item_id)
+    if item_to_delete.exists():
+        item_to_delete[0].delete()
+        messages.info(request, "Item has been deleted")
+    return redirect(reverse('order_summary'))
 
-    def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden()
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
 
-    def form_valid(self, form):
-        thread = self.get_object()
-        user = self.request.user
-        message = form.cleaned_data.get("message")
-        ChatMessage.objects.create(user=user, thread=thread, message=message)
-        return super().form_valid(form)
+
+
+    
+
+    
