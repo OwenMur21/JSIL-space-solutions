@@ -62,9 +62,8 @@ SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
 LOGIN_REDIRECT_URL = 'homepage'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '644850949568-qmma6vbh0oodkgu9ag9moc72fh1e655j.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'VvvRv5ieAh5QxSC3LiD5pDup'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '240273445821-t2134rdbqu1kr7gjmllfajuqgtndloav.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '30x3nHUKzrP0q5coemewM5JB'
 GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY')
 
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')

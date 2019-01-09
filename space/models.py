@@ -13,6 +13,29 @@ User = get_user_model()
 # Create your models here.
 
 
+class Category(models.Model):
+#     LOCATION_CHOICES = (
+#     ('Over the door shoe rack','Over the door shoe rack'),
+#     ('Class room organizers','Class room organizers'),
+#     ('Office organizers','Office organizers'),
+#     ('Wardrobe organizers','Wardrobe organizers'),
+#     ('Tool box','Tool box'),
+#     ('Bathroom Organizers','Bathroom Organizers'),
+#     ('Toilet paper holders','Toilet paper holders'),
+#     ('Kitchen organizers','Kitchen organizers'),
+#     ('Car organizers,','Car organizers,'),
+#     (' Car boot organizers',' Car boot organizers'),
+#   )
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def save_category(self):
+        self.save()
+
+    def delete_category(self):
+        self.delete()
 
 class Product(models.Model):
     '''
@@ -22,6 +45,7 @@ class Product(models.Model):
     name = models.CharField(max_length=40)
     posted_on = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
+    category = models.ForeignKey(Category)
     price = models.DecimalField(decimal_places=2, max_digits=20)
 
     def __str__(self):
@@ -51,6 +75,11 @@ class Product(models.Model):
         product =  cls.objects.filter(name__icontains=name)
         return product
 
+    @classmethod
+    def filter_by_category(cls, id):
+        products = cls.objects.filter(category_id=id)
+        return products
+
     @property
     def count_likes(self):
         likes = self.likes.count()
@@ -61,7 +90,6 @@ class Product(models.Model):
     def count_comments(self):
         comments = self.comments.count()
         return comments
-
 
 class Profile(models.Model):
     """

@@ -138,10 +138,12 @@ def like(request, product_id):
 
     return redirect('landing')
 
-
-@login_required(login_url='/accounts/login/')
-def about(request):
-    return render(request,'about_us.html')
+def filter_by_category(request,category_id):
+    '''
+    Filters the database and displays products according to category_id
+    '''
+    products = Product.filter_by_category(id = category_id)
+    return render(request,'category.html',{"products":products})
 
 def my_profile(request):
     my_user_profile = Profile.objects.filter(user=request.user).first()
