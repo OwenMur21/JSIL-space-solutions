@@ -21,40 +21,13 @@ from django.views.generic import DetailView, ListView
 from django.urls import reverse
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Thread, ChatMessage
+# from .models import Thread, ChatMessage
 
 
 from django.urls import reverse
 
 @login_required(login_url='/accounts/login/')
 def homepage(request):
-    products = Product.objects.all()
-    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
-    current_order_products = []
-    if filtered_orders.exists():
-    	user_order = filtered_orders[0]
-    	user_order_items = user_order.items.all()
-    	current_order_products = [product.product for product in user_order_items]
-
-    context = {
-        'products': products,
-        'current_order_products': current_order_products
-         }
-    comments = Comment.objects.all()
-    likes = Likes.objects.all()
-    return render(request, 'home.html',locals())
-
-def get_user_pending_order(request):
-    # get order for the correct user
-    user_profile = get_object_or_404(Profile, user=request.user)
-    order = Order.objects.filter(owner=user_profile, is_ordered=False)
-    if order.exists():
-        # get the only order in the list of filtered orders
-        return order[0]
-    return 0
-
-
-def landing(request):
     products = Product.objects.all()
     filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
     current_order_products = []
@@ -96,7 +69,7 @@ def signup(request):
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
-            return redirect('landing')
+            return redirect('homepage')
     else:
         form = SignupForm()
 
@@ -110,7 +83,7 @@ def signup(request):
         if form.is_valid() and request.recaptcha_is_valid:
             form.save()
             messages.success(request, 'Account created successfully!')
-            return redirect('landing')
+            return redirect('homepage')
     else:
         form = SignupForm()
 
@@ -126,7 +99,7 @@ def comment(request, product_id):
             comment.user = request.user
             comment.product = products
             comment.save()
-    return redirect('landing')
+    return redirect('homepage')
 
 
 @login_required(login_url='/accounts/login/')
@@ -136,7 +109,7 @@ def like(request, product_id):
     new_like,created= Likes.objects.get_or_create(who_liked=current_user, liked_product=liked_product)
     new_like.save()
 
-    return redirect('landing')
+    return redirect('homepage')
 
 def filter_by_category(request,category_id):
     '''
@@ -169,7 +142,7 @@ def add_to_cart(request, **kwargs):
     # check if the user already owns this product
     if product in request.user.profile.products.all():
         messages.info(request, 'You already own this product')
-        return redirect(reverse('landing')) 
+        return redirect(reverse('homepage')) 
     # create orderItem of the selected product
     order_item, status = OrderItem.objects.get_or_create(product=product)
     # create order associated with the user
@@ -182,7 +155,7 @@ def add_to_cart(request, **kwargs):
 
     # show confirmation message and redirect back to the same page
     messages.info(request, "item added to cart")
-    return redirect(reverse('landing'))
+    return redirect(reverse('homepage'))
 
 
 @login_required()
@@ -193,9 +166,19 @@ def delete_from_cart(request, item_id):
         messages.info(request, "Item has been deleted")
     return redirect(reverse('order_summary'))
 
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+  if 'product' in request.GET and request.GET["product"]:
+    name = request.GET.get("product")
+    searched_products = Product.search_products(name)
+    message = f"{name}"
+
+    return render(request, 'search.html',{"message":message,"products":searched_products})
+
+  else:
+    message = "You haven't searched for anything"
+    return render(request, 'search.html',{"message":message})
 
 
-
-    
 
     
