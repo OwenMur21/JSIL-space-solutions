@@ -4,6 +4,7 @@
 {% block styles %}
 {{block.super}}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 {% endblock %}
 
 
@@ -55,13 +56,13 @@
                 <!-- Navigation -->
                 <div class="jsil-navigation-container">
                     <nav class="jsil-navigation mdl-navigation">
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="/">Home&nbsp;<i class="fas fa-home"></i></a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'chat' %}">Chats&nbsp;<i class="fas fa-home"></i></a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="#about">About Us</a>
                 
                         
                         <!-- Right aligned menu below button -->
                         <a id="demo-menu-lower-right"
-                        class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;">Our Products</a>
+                        class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;cursor: pointer !important;">Products</a>
                         
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="demo-menu-lower-right">
@@ -100,10 +101,10 @@
             <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
         </span>
         <nav class="mdl-navigation">
-            <a href="/"><span class="mdl-navigation__link" style="font-size: 17px;">Home&nbsp;<i class="fas fa-home"></i></span></a>
+            <a href="{% url 'chat' %}"><span class="mdl-navigation__link" style="font-size: 17px;">Chats&nbsp;<i class="fas fa-home"></i></span></a>
             <div class="jsil-drawer-separator"></div>
             
-            <span class="mdl-navigation__link" style="font-size: 17px;" href="">Products</span>
+            <span class="mdl-navigation__link" style="font-size: 17px;" href="">Our Products</span>
             <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;" href="/category/1">Over the door shoe racks</a>
             <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;" href="/category/2">Classroom organizers</a>
             <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;" href="/category/3">Office organizers</a>

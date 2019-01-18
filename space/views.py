@@ -2,16 +2,14 @@ from django.shortcuts import render, redirect , get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.models import User # May not be in use
-from django.http  import HttpResponse,Http404,HttpResponseRedirect
+from django.http  import HttpResponse,Http404,HttpResponseRedirect,HttpResponseForbidden,JsonResponse
 from django.contrib.auth import login, authenticate, get_user_model
 import json
+from jsil import settings
 import urllib
-from django.shortcuts import render, redirect,get_object_or_404
-from django.conf import settings
 from django.contrib import messages
 from .forms import SignupForm,CommentForm,ComposeForm,ImageForm
 from .models import *
-from django.http  import HttpResponse,Http404,HttpResponseRedirect,HttpResponseForbidden
 from django.contrib import messages
 from django.conf import settings
 import requests
@@ -179,6 +177,27 @@ def search_results(request):
     message = "You haven't searched for anything"
     return render(request, 'search.html',{"message":message})
 
+def Home(request):
+    c = Chat.objects.all()
+    return render(request, "chat.html", {'home': 'active', 'chat': c})
 
+def Post(request):
+    if request.method == "POST":
+        msg = request.POST.get('msgbox', None)
+        
+        c = Chat(user=request.user, message=msg)
+            
+        
+        msg = c.user.username+": "+msg
 
-    
+        c = Chat(user=request.user, message=msg)
+
+        if msg != '':            
+            c.save()
+        return JsonResponse({ 'msg': msg, 'user': c.user.username})
+    else:
+        return HttpResponse('Request must be POST.')
+
+def Messages(request):
+    c = Chat.objects.all()
+    return render(request, 'messages.html', {'chat': c})

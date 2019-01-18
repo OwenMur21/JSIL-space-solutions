@@ -230,4 +230,12 @@ class Transaction(models.Model):
         ordering = ['-timestamp']
 
 
+class Chat(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User)
+    message = models.TextField()
+
+    def __unicode__(self):
+        return self.message
+
 

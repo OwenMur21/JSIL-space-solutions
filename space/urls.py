@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.contrib import admin
 
 urlpatterns=[
   url('^$',views.homepage,name = 'homepage'),
@@ -13,10 +14,16 @@ urlpatterns=[
   url(r'^order-summary/$', views.order_details, name="order_summary"),
   url(r'^add-to-cart/(?P<item_id>[-\w]+)/$', views.add_to_cart, name='add_to_cart'),
   url(r'^item/delete/(?P<item_id>[-\w]+)/$', views.delete_from_cart, name='delete_item'),
+  url(r'^home/$', views.Home, name='chat'),
+  url(r'^post/$', views.Post, name='post'),
+  url(r'^messages/$', views.Messages, name='messages'),
+
   # url(r'^checkout/$', views.checkout, name='checkout'),
 
 
 ]
+def __unicode__(self):
+   return self.message
 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
