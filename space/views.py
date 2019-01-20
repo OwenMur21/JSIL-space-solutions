@@ -18,6 +18,7 @@ import requests
 from .decorators import check_recaptcha
 from django.http import JsonResponse
 from django.urls import reverse
+from django_daraja.mpesa.core import MpesaClient
 
 
 def get_user_pending_order(request):
@@ -166,6 +167,21 @@ def delete_from_cart(request, item_id):
         item_to_delete[0].delete()
         messages.info(request, "Item has been deleted")
     return redirect(reverse('order_summary'))
+
+def checkout(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '0710351482'
+    amount = 1
+    account_reference = 'reference'
+    transaction_desc = 'Description'
+    callback_url = request.build_absolute_uri(reverse('mpesa_stk_push_callback'))
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response.text)
+
+def stk_push_callback(request):
+        data = request.body
+        # You can do whatever you want with the notification received from MPESA here.
 
 
 

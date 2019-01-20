@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'social_django',
     'django.contrib.sites',
-
+    'django_daraja',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
