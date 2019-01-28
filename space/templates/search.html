@@ -1,53 +1,98 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
+
 {% block styles %}
 {{block.super}}
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-crossorigin="anonymous">
-
-
-
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 {% endblock %}
+
+
 {% block content %}
+<html lang="en">
+<head>
+    
+    <style>*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+        .clearfix:before, .clearfix:after { display: table; content: ''; }
+        .clearfix:after { clear: both; }
+        @import '../../src/material-design-lite';
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        #back_to_top {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+    </style>
+</head>
 <div class="jsil-header mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
         <span class="jsil-title mdl-layout-title">
-                <a href="/">
-                    <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
-
-                </a>
+            <a href="/">
+                <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
+                
+            </a>
         </span>
         <div class="jsil-header-spacer mdl-layout-spacer"></div>
         <div class="jsil-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
                 <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Search product by name">search</i>
             </label>
-            <div class="mdl-textfield__expandable-holder">
-                <input class="mdl-textfield__input" type="text" id="search-field">
-            </div>
+            <form class="form" role="search" action="{% url 'search_results' %}">
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" name="product" id="search-field">
+                </div>
+            </form>
+            
         </div>
+        
         <!-- Navigation -->
         <div class="jsil-navigation-container">
             <nav class="jsil-navigation mdl-navigation">
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 16px;" href="/">Home&nbsp;<i class="fas fa-home"></i></a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 16px;" href="#about">About Us</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 16px;" href="">Our Products</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 16px;" href="">Contacts&nbsp;<i class="fas fa-phone"></i></a> 
-                <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 16px;" href="#payment">Payment Info</a> 
-            </nav>
-        </div>
-        <span class="jsil-mobile-title mdl-layout-title">
-            <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
-        </span>
-        <button class="jsil-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
-            <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Account">more_vert</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-            <a href="/logout/" style="text-decoration-line: none !important;"><li class="mdl-menu__item">Logout</li></a>
-            <a href="/accounts/password/change/" style="text-decoration-line: none !important;"><li class="mdl-menu__item">Change Password</li></a>
-        </ul>
+                <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'chat' %}">Chats&nbsp;<i class="fas fa-home"></i></a>
+                <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="#about">About Us</a>
+                
+                
+                <!-- Right aligned menu below button -->
+                <a id="demo-menu-lower-right"
+                class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;cursor: pointer !important;">Products</a>
+                
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                for="demo-menu-lower-right">
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/1">Over the door shoe racks</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/2">Class room organizers</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/3">Office organizers</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/4">Wardrobe organizers</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/5">Tool box</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/6">Bathroom organizers</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/7">Toilet paper holders</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/8">Kitchen organizers</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/9">Car organizers</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;" href="/category/10">Car boot organizers</a></li>
+            </ul>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="">Contacts&nbsp;<i class="fas fa-phone"></i></a> 
+            <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="#payment">Payment Info</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'my_profile' %}">Profile</a>
+            
+        </nav>
     </div>
+    <span class="jsil-mobile-title mdl-layout-title">
+        <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
+    </span>
+    <button class="jsil-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Account">more_vert</i>
+    </button>
+    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+        <a href="/logout/" style="text-decoration-line: none !important;"><li class="mdl-menu__item">Logout</li></a>
+        <a href="/accounts/password/change/" style="text-decoration-line: none !important;"><li class="mdl-menu__item">Change Password</li></a>
+    </ul>
+</div>
 </div>
 
 <div class="jsil-drawer mdl-layout__drawer">
@@ -55,9 +100,10 @@ crossorigin="anonymous">
         <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
     </span>
     <nav class="mdl-navigation">
-        <a href="/"><span class="mdl-navigation__link" style="font-size: 17px;">Home&nbsp;<i class="fas fa-home"></i></span></a>
+        <a href="{% url 'chat' %}"><span class="mdl-navigation__link" style="font-size: 17px;">Chats&nbsp;<i class="fas fa-home"></i></span></a>
         <div class="jsil-drawer-separator"></div>
-        <span class="mdl-navigation__link" style="font-size: 17px;" href="">Products</span>
+        
+        <span class="mdl-navigation__link" style="font-size: 17px;" href="">Our Products</span>
         <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;" href="/category/1">Over the door shoe racks</a>
         <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;" href="/category/2">Classroom organizers</a>
         <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;" href="/category/3">Office organizers</a>
@@ -74,123 +120,125 @@ crossorigin="anonymous">
         <a href=""><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;" href="">Contacts</span></a>
         <div class="jsil-drawer-separator"></div>
         <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;" href="#payment">Payment Info</span></a> 
-        <div class="jsil-drawer-separator"></div>     
+        <div class="jsil-drawer-separator"></div>
+        <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;" href="{% url 'my_profile' %}">Profile</span></a>     
     </nav>
 </div>
 <br>
 <br>
-
-<div class="container" style="font-family: 'Raleway', Arial, sans-serif !important;">
     
-    <div class="row">
+    
+    <div class="container" style="font-family: 'Raleway', Arial, sans-serif !important;">
+        
+        <div class="row">
+            
+            {% if products %}
+            <br>
+            <br>
+            <h3>Found {{ products|length }} results of searched term <b>{{message}}</b></h3>
+            {% else %}
+            <br>
+            <br>
+            <h3 style="text-align:center;">Sorry!!The searched term <b>{{message}}</b> can't be found!!</h3>
+            {% endif %}
+            
+        </div>
+        <br>
+        
         
         {% if products %}
-        <br>
-        <br>
-        <h3>Found {{ products|length }} results of searched term <b>{{message}}</b></h3>
-        {% else %}
-        <br>
-        <br>
-        <h3 style="text-align:center;">Sorry!!The searched term <b>{{message}}</b> can't be found!!</h3>
-        {% endif %}
-        
-    </div>
-    <br>
-    
-    
-    {% if products %}
-    {% for product in products %}
-    <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="thumbnail" style="width:100% !important;height: 100% !important;" >
-            <figure class="product-images" style="box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4), 0 3px 17px 0 rgba(0, 0, 0, 0.18) !important;">
-                <img src="{{product.post.url}}" class = "img-responsive imagee" style="height:400px;width: 100% !important;position: center;size: cover;" alt=""/>
-                <figcaption>
-                    <h4 style="color:white;font-size: 19px;bottom: 4px;"><span>{{product.name}}</span></h4>                                
-                    <p>
-                        <a id="eye" data-toggle="modal" data-target="#modalQuickView{{product.id}}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View more details"></i></a>
-                        <a href="#"><i class="fa fa-fw fa-heart"  data-toggle="tooltip" data-placement="top" title="Like"></i></a>
-                        <a href="#"><i class="fas fa-comment"  data-toggle="tooltip" data-placement="top" title="Comment"></i></a>
-                    </p>
-                </figcaption>			
-            </figure>
-        </div> 
-        <!-- Modal: modalQuickView -->
-        <div class="modal fade" id="modalQuickView{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" style="margin-top:50px !important;">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <!--Carousel Wrapper-->
-                            <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="{{product.post.url}}" style="height:100% !important;"
-                                        alt="First slide">
+        {% for product in products %}
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="thumbnail" style="width:100% !important;height: 100% !important;" >
+                <figure class="product-images" style="box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4), 0 3px 17px 0 rgba(0, 0, 0, 0.18) !important;">
+                    <img src="{{product.post.url}}" class = "img-responsive imagee" style="height:400px;width: 100% !important;position: center;size: cover;" alt=""/>
+                    <figcaption>
+                        <h4 style="color:white;font-size: 19px;bottom: 4px;"><span>{{product.name}}</span></h4>                                
+                        <p>
+                            <a id="eye" data-toggle="modal" data-target="#modalQuickView{{product.id}}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View more details"></i></a>
+                            <a href="#"><i class="fa fa-fw fa-heart"  data-toggle="tooltip" data-placement="top" title="Like"></i></a>
+                            <a href="#"><i class="fas fa-comment"  data-toggle="tooltip" data-placement="top" title="Comment"></i></a>
+                        </p>
+                    </figcaption>			
+                </figure>
+            </div> 
+            <!-- Modal: modalQuickView -->
+            <div class="modal fade" id="modalQuickView{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" style="margin-top:50px !important;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <!--Carousel Wrapper-->
+                                <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+                                    <!--Slides-->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="{{product.post.url}}" style="height:100% !important;"
+                                            alt="First slide">
+                                        </div>
                                     </div>
                                 </div>
+                                <!--/.Carousel Wrapper-->
                             </div>
-                            <!--/.Carousel Wrapper-->
-                        </div>
-                        <div class="col-lg-7">
-                            <h2 class="h2-responsive product-name">
-                                <strong>{{product.name}}</strong>
-                            </h2>
-                            <h4 class="h4-responsive">
-                                <span class="green-text">
-                                    <strong>Ksh.{{product.price}}</strong>
-                                </span>
-                            </h4>
-                            <h5 class="h5-responsive">
-                                <span class="green-text">
-                                    <strong>{{product.posted_on}}</strong>
-                                </span>
-                            </h5>
-                            
-                            
-                            <!-- Add to Cart -->
-                            <div class="card-body">
-                                <div class="row">
-                                    
-                                    <h5>{{product.description}}</h5>
-                                </div>
-                                <br>
-                                <span>
-                                    <i class="fas fa-comments"></i>&nbsp;<span>{{product.comment.count}} comment(s)</span>
-                                    <br>
-                                    <i class="fas fa-heart"></i>&nbsp;<span>{{product.count_likes}} likes</span>
-                                </span>
-                                <br>
+                            <div class="col-lg-7">
+                                <h2 class="h2-responsive product-name">
+                                    <strong>{{product.name}}</strong>
+                                </h2>
+                                <h4 class="h4-responsive">
+                                    <span class="green-text">
+                                        <strong>Ksh.{{product.price}}</strong>
+                                    </span>
+                                </h4>
+                                <h5 class="h5-responsive">
+                                    <span class="green-text">
+                                        <strong>{{product.posted_on}}</strong>
+                                    </span>
+                                </h5>
                                 
-                                <div class="text-right">
+                                
+                                <!-- Add to Cart -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        
+                                        <h5>{{product.description}}</h5>
+                                    </div>
+                                    <br>
+                                    <span>
+                                        <i class="fas fa-comments"></i>&nbsp;<span>{{product.comment.count}} comment(s)</span>
+                                        <br>
+                                        <i class="fas fa-heart"></i>&nbsp;<span>{{product.count_likes}} likes</span>
+                                    </span>
+                                    <br>
                                     
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {% if product in user.profile.products.all %}
-                                    You own this
-                                    {% elif product in current_order_products %}
-                                    <a href="{% url 'order_summary' %}" class="btn btn-warning">Go to Cart</a>
-                                    {% else %}
-                                    <a href="{% url 'add_to_cart' product.id %}"  class="btn btn-success">Add to cart
-                                        <i class="fa fa-cart-plus ml-2" aria-hidden="true"></i></a>
-                                    </button>
-                                    {% endif %}
+                                    <div class="text-right">
+                                        
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        {% if product in user.profile.products.all %}
+                                        You own this
+                                        {% elif product in current_order_products %}
+                                        <a href="{% url 'order_summary' %}" class="btn btn-warning">Go to Cart</a>
+                                        {% else %}
+                                        <a href="{% url 'add_to_cart' product.id %}"  class="btn btn-success">Add to cart
+                                            <i class="fa fa-cart-plus ml-2" aria-hidden="true"></i></a>
+                                        </button>
+                                        {% endif %}
+                                    </div>
                                 </div>
+                                <!-- /.Add to Cart -->
                             </div>
-                            <!-- /.Add to Cart -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
+        <br>
     </div>
-    <br>
-    <br>
-</div>
-{% endfor %}
-{% endif %}
-
+    {% endfor %}
+    {% endif %}
+    
 </div>
 <style>
     body {
@@ -217,7 +265,7 @@ crossorigin="anonymous">
     .jsil-search-box .mdl-textfield__input {
         color: whitesmoke;
         font-family: 'Raleway', Arial, sans-serif !important;
-        
+
     }
     
     .jsil-header .mdl-menu__container {
@@ -547,370 +595,370 @@ crossorigin="anonymous">
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;    }
+    
+    .jsil-more-section {
+        padding: 80px 0;
+        max-width: 1044px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .jsil-more-section .jsil-section-title {
+        margin-left: 12px;
+        padding-bottom: 24px;
+    }
+    
+    
+    .jsil-card-container .mdl-card__media {
+        overflow: hidden;
+        background: transparent;
+    }
+    
+    .jsil-card-container .mdl-card__media img {
+        width: 100%;
+    }
+    
+    .jsil-card-container .mdl-card__title {
+        background: transparent;
+        height: auto;
+    }
+    
+    .jsil-card-container .mdl-card__title-text {
+        color: rgb(211, 71, 94) ;
+        font-weight: bolder !important;
+        height: auto;
+    }
+    
+    .jsil-card-container .mdl-card__supporting-text {
+        height: auto;
+        color: black;
         
-        .jsil-more-section {
-            padding: 80px 0;
-            max-width: 1044px;
-            margin-left: auto;
-            margin-right: auto;
+        
+    }
+    
+    
+    .jsil-link-menu:hover {
+        cursor: pointer;
+    }
+    
+    
+    /**** Mobile layout ****/
+    @media (max-width: 900px) {
+        .jsil-navigation-container {
+            display: none;
         }
         
-        .jsil-more-section .jsil-section-title {
-            margin-left: 12px;
-            padding-bottom: 24px;
+        .jsil-title {
+            display: none !important;
         }
         
-        
-        .jsil-card-container .mdl-card__media {
-            overflow: hidden;
-            background: transparent;
-        }
-        
-        .jsil-card-container .mdl-card__media img {
-            width: 100%;
-        }
-        
-        .jsil-card-container .mdl-card__title {
-            background: transparent;
-            height: auto;
-        }
-        
-        .jsil-card-container .mdl-card__title-text {
-            color: rgb(211, 71, 94) ;
-            font-weight: bolder !important;
-            height: auto;
-        }
-        
-        .jsil-card-container .mdl-card__supporting-text {
-            height: auto;
-            color: black;
-            
-            
-        }
-        
-        
-        .jsil-link-menu:hover {
-            cursor: pointer;
-        }
-        
-        
-        /**** Mobile layout ****/
-        @media (max-width: 900px) {
-            .jsil-navigation-container {
-                display: none;
-            }
-            
-            .jsil-title {
-                display: none !important;
-            }
-            
-            .jsil-mobile-title {
-                display: block !important;
-                position: absolute;
-                left: calc(50% - 70px);
-                top: 12px;
-                transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            
-            /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
-            consecutive "+" operators in some cases. Therefore, we need to use both
-            here to cover all the bases. */
-            .jsil.jsil-search-box.is-focused ~ .jsil-mobile-title,
-            .jsil-search-box.is-focused + .jsil-navigation-container + .jsil-mobile-title {
-                opacity: 0;
-            }
-            
-            .jsil-more-button {
-                display: none;
-            }
-            
-            .jsil-search-box.is-focused {
-                width: calc(100% - 48px);
-            }
-            
-            .jsil-search-box .mdl-textfield__expandable-holder {
-                width: 100%;
-            }
-            
-            .jsil-be-together-section {
-                height: 350px;
-            }
-            
-            .jsil-slogan {
-                font-size: 26px;
-                margin: 0 16px;
-                padding-top: 24px;
-            }
-            
-            .jsil-sub-slogan {
-                font-size: 16px;
-                margin: 0 16px;
-                padding-top: 8px;
-            }
-            
-            .jsil-create-character {
-                padding-top: 200px;
-                font-size: 16px;
-            }
-            
-            .jsil-create-character img {
-                height: 12px;
-            }
-            
-            .jsil-fab {
-                display: none;
-            }
-            
-            .jsil-wear-band-text {
-                margin-left: 0;
-                padding: 16px;
-            }
-            
-            .jsil-footer .mdl-mega-footer--bottom-section {
-                display: none;
-            }
-        }
-        section {
-            padding: 1em;
-            text-align: center;
-        }
-        
-        .content {
-            margin: 0 auto;
-            max-width: 1000px;
-        }
-        
-        .content > h2 {
-            clear: both;
-            margin: 0;
-            padding: 4em 1% 0;
-            color: #484B54;
-            font-weight: 800;
-            font-size: 1.5em;
-        }
-        
-        .content > h2:first-child {
-            padding-top: 0em;
-        }
-        
-        .thumbnail {
-            height: 450px !important;
-            width: 400px !important;
-            overflow: hidden !important;
-        }
-        .thumbnail img {
-            height: 450px !important;
-            width: 400px !important;
-        }
-        /* Common style */
-        .thumbnail figure {
-            position: relative;
-            float: left;
-            overflow: hidden;
-            margin: 10px 1%;
-            min-width: 320px;
-            max-width: 480px;
-            max-height: 360px;
-            width: 48%;
-            height: auto;
-            background: #3085a3;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .thumbnail figure img {
-            position: relative;
-            display: block;
-            min-height: 100%;
-            max-width: 100%;
-            opacity: 0.8;
-        }
-        
-        .thumbnail figure figcaption {
-            padding: 2em;
-            color: whitesmoke;
-            font-size: 1.30em;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-        
-        .thumbnail figure figcaption::before,
-        .thumbnail figure figcaption::after {
-            pointer-events: none;
-        }
-        
-        .thumbnail figure figcaption,
-        .thumbnail figure figcaption > a {
+        .jsil-mobile-title {
+            display: block !important;
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            left: calc(50% - 70px);
+            top: 12px;
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Anchor will cover the whole item by default */
-        /* For some effects it will show as a button */
-        .thumbnail figure figcaption > a {
-            z-index: 1000;
-            text-indent: 200%;
-            white-space: nowrap;
-            font-size: 0;
+        /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
+        consecutive "+" operators in some cases. Therefore, we need to use both
+        here to cover all the bases. */
+        .jsil.jsil-search-box.is-focused ~ .jsil-mobile-title,
+        .jsil-search-box.is-focused + .jsil-navigation-container + .jsil-mobile-title {
             opacity: 0;
         }
         
-        .thumbnail figure h4 {
-            word-spacing: -0.15em;
-            font-weight: 300;
+        .jsil-more-button {
+            display: none;
         }
         
-        .thumbnail figure h4 span {
-            font-weight: 800;
+        .jsil-search-box.is-focused {
+            width: calc(100% - 48px);
         }
         
-        .thumbnail figure h4,
-        .thumbnail figure p {
-            margin: 0;
+        .jsil-search-box .mdl-textfield__expandable-holder {
+            width: 100%;
         }
         
-        .thumbnail figure p {
-            letter-spacing: 1px;
-            font-size: 68.5%;
+        .jsil-be-together-section {
+            height: 350px;
         }
         
-        
-        figure.product-images figcaption {
-            padding: 1em;
+        .jsil-slogan {
+            font-size: 26px;
+            margin: 0 16px;
+            padding-top: 24px;
         }
         
-        figure.product-images figcaption::before,
-        figure.product-images figcaption::after {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            border-style: solid;
-            border-color: rgb(211, 71, 94);
-            content: '';
-            -webkit-transition: -webkit-transform 0.35s;
-            transition: transform 0.35s;
+        .jsil-sub-slogan {
+            font-size: 16px;
+            margin: 0 16px;
+            padding-top: 8px;
         }
         
-        figure.product-images figcaption::before {
-            right: 0;
-            bottom: 0;
-            border-width: 0 70px 60px 0;
-            -webkit-transform: translate3d(70px,60px,0);
-            transform: translate3d(70px,60px,0);
+        .jsil-create-character {
+            padding-top: 200px;
+            font-size: 16px;
         }
         
-        figure.product-images figcaption::after {
-            top: 0;
-            left: 0;
-            border-width: 15px 0 0 15px;
-            -webkit-transform: translate3d(-15px,-15px,0);
-            transform: translate3d(-15px,-15px,0);
+        .jsil-create-character img {
+            height: 12px;
         }
         
-        figure.product-images img,
-        figure.product-images p a {
-            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-            transition: opacity 0.35s, transform 0.35s;
+        .jsil-fab {
+            display: none;
         }
         
-        figure.product-images img {
-            opacity: 0.85;
+        .jsil-wear-band-text {
+            margin-left: 0;
+            padding: 16px;
         }
         
+        .jsil-footer .mdl-mega-footer--bottom-section {
+            display: none;
+        }
+    }
+    section {
+        padding: 1em;
+        text-align: center;
+    }
+    
+    .content {
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+    
+    .content > h2 {
+        clear: both;
+        margin: 0;
+        padding: 4em 1% 0;
+        color: #484B54;
+        font-weight: 800;
+        font-size: 1.5em;
+    }
+    
+    .content > h2:first-child {
+        padding-top: 0em;
+    }
+    
+    .thumbnail {
+        height: 450px !important;
+        width: 400px !important;
+        overflow: hidden !important;
+    }
+    .thumbnail img {
+        height: 450px !important;
+        width: 400px !important;
+    }
+    /* Common style */
+    .thumbnail figure {
+        position: relative;
+        float: left;
+        overflow: hidden;
+        margin: 10px 1%;
+        min-width: 320px;
+        max-width: 480px;
+        max-height: 360px;
+        width: 48%;
+        height: auto;
+        background: #3085a3;
+        text-align: center;
+        cursor: pointer;
+    }
+    
+    .thumbnail figure img {
+        position: relative;
+        display: block;
+        min-height: 100%;
+        max-width: 100%;
+        opacity: 0.8;
+    }
+    
+    .thumbnail figure figcaption {
+        padding: 2em;
+        color: whitesmoke;
+        font-size: 1.30em;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    .thumbnail figure figcaption::before,
+    .thumbnail figure figcaption::after {
+        pointer-events: none;
+    }
+    
+    .thumbnail figure figcaption,
+    .thumbnail figure figcaption > a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Anchor will cover the whole item by default */
+    /* For some effects it will show as a button */
+    .thumbnail figure figcaption > a {
+        z-index: 1000;
+        text-indent: 200%;
+        white-space: nowrap;
+        font-size: 0;
+        opacity: 0;
+    }
+    
+    .thumbnail figure h4 {
+        word-spacing: -0.15em;
+        font-weight: 300;
+    }
+    
+    .thumbnail figure h4 span {
+        font-weight: 800;
+    }
+    
+    .thumbnail figure h4,
+    .thumbnail figure p {
+        margin: 0;
+    }
+    
+    .thumbnail figure p {
+        letter-spacing: 1px;
+        font-size: 68.5%;
+    }
+    
+    
+    figure.product-images figcaption {
+        padding: 1em;
+    }
+    
+    figure.product-images figcaption::before,
+    figure.product-images figcaption::after {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        border-style: solid;
+        border-color: rgb(211, 71, 94);
+        content: '';
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+    }
+    
+    figure.product-images figcaption::before {
+        right: 0;
+        bottom: 0;
+        border-width: 0 70px 60px 0;
+        -webkit-transform: translate3d(70px,60px,0);
+        transform: translate3d(70px,60px,0);
+    }
+    
+    figure.product-images figcaption::after {
+        top: 0;
+        left: 0;
+        border-width: 15px 0 0 15px;
+        -webkit-transform: translate3d(-15px,-15px,0);
+        transform: translate3d(-15px,-15px,0);
+    }
+    
+    figure.product-images img,
+    figure.product-images p a {
+        -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+        transition: opacity 0.35s, transform 0.35s;
+    }
+    
+    figure.product-images img {
+        opacity: 0.85;
+    }
+    
+    figure.product-images h4 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 0.4em 10px;
+        width: 50%;
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+        -webkit-transform: translate3d(100%,0,0);
+        transform: translate3d(100%,0,0);
+    }
+    
+    @media screen and (max-width: 920px) {
         figure.product-images h4 {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 0.4em 10px;
-            width: 50%;
-            -webkit-transition: -webkit-transform 0.35s;
-            transition: transform 0.35s;
-            -webkit-transform: translate3d(100%,0,0);
-            transform: translate3d(100%,0,0);
+            padding: 0.75em 10px;
+            font-size: 120%;
         }
+    }
+    
+    figure.product-images p {
+        float: right;
+        clear: both;
+        text-align: left;
+        text-transform: none;
+        font-size: 111%;
+    }
+    
+    figure.product-images p a {
+        display: block;
+        margin-bottom: 1em;
+        color: #fff;
+        opacity: 0;
+        -webkit-transform: translate3d(90px,0,0);
+        transform: translate3d(90px,0,0);
+    }
+    
+    figure.product-images p a:hover,
+    figure.product-images p a:focus {
+        color: rgb(94, 45, 114);
+    }
+    
+    figure.product-images:hover figcaption::before,
+    figure.product-images:hover figcaption::after {
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+    
+    figure.product-images:hover img {
+        opacity: 0.6;
         
-        @media screen and (max-width: 920px) {
-            figure.product-images h4 {
-                padding: 0.75em 10px;
-                font-size: 120%;
-            }
-        }
+    }
+    
+    figure.product-images:hover h4,
+    figure.product-images:hover p a {
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+    
+    figure.product-images:hover p a {
+        opacity: 1;
+    }
+    
+    figure.product-images:hover p a:first-child {
+        -webkit-transition-delay: 0.025s;
+        transition-delay: 0.025s;
+    }
+    
+    figure.product-images:hover p a:nth-child(2) {
+        -webkit-transition-delay: 0.05s;
+        transition-delay: 0.05s;
+    }
+    
+    figure.product-images:hover p a:nth-child(3) {
+        -webkit-transition-delay: 0.075s;
+        transition-delay: 0.075s;
+    }
+    
+    figure.product-images:hover p a:nth-child(4) {
+        -webkit-transition-delay: 0.1s;
+        transition-delay: 0.1s;
+    }
+    
+    .imagee{
+        width: 100% !important;
+    }
+    #eye:hover{
+        color: rgb(94, 45, 114) !important;
         
-        figure.product-images p {
-            float: right;
-            clear: both;
-            text-align: left;
-            text-transform: none;
-            font-size: 111%;
-        }
-        
-        figure.product-images p a {
-            display: block;
-            margin-bottom: 1em;
-            color: #fff;
-            opacity: 0;
-            -webkit-transform: translate3d(90px,0,0);
-            transform: translate3d(90px,0,0);
-        }
-        
-        figure.product-images p a:hover,
-        figure.product-images p a:focus {
-            color: rgb(94, 45, 114);
-        }
-        
-        figure.product-images:hover figcaption::before,
-        figure.product-images:hover figcaption::after {
-            -webkit-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
-        }
-        
-        figure.product-images:hover img {
-            opacity: 0.6;
-            
-        }
-        
-        figure.product-images:hover h4,
-        figure.product-images:hover p a {
-            -webkit-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
-        }
-        
-        figure.product-images:hover p a {
-            opacity: 1;
-        }
-        
-        figure.product-images:hover p a:first-child {
-            -webkit-transition-delay: 0.025s;
-            transition-delay: 0.025s;
-        }
-        
-        figure.product-images:hover p a:nth-child(2) {
-            -webkit-transition-delay: 0.05s;
-            transition-delay: 0.05s;
-        }
-        
-        figure.product-images:hover p a:nth-child(3) {
-            -webkit-transition-delay: 0.075s;
-            transition-delay: 0.075s;
-        }
-        
-        figure.product-images:hover p a:nth-child(4) {
-            -webkit-transition-delay: 0.1s;
-            transition-delay: 0.1s;
-        }
-        
-        .imagee{
-            width: 100% !important;
-        }
-        #eye:hover{
-            color: rgb(94, 45, 114) !important;
-            
-        }
-        
-    </style>
+    }
+    
+</style>
     {% endblock %}
     {% block scripts %} {{block.super}}
     

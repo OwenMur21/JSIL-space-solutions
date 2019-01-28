@@ -44,13 +44,15 @@
                                 </a>
                         </span>
                         <div class="jsil-header-spacer mdl-layout-spacer"></div>
-                        <div class="jsil-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-                            <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+                        <div class="jsil-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width" >
+                            <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field" >
                                 <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Search product by name">search</i>
                             </label>
-                            <div class="mdl-textfield__expandable-holder">
-                                <input class="mdl-textfield__input" type="text" id="search-field">
-                            </div>
+                            <form class="form" role="search" action="{% url 'search_results' %}">
+                                <div class="mdl-textfield__expandable-holder">
+                                    <input class="mdl-textfield__input" type="text" name="product" id="search-field">
+                                </div>
+                            </form>
                         </div>
                         <!-- Navigation -->
                         <div class="jsil-navigation-container">
@@ -102,6 +104,8 @@
                         <div class="jsil-drawer-separator"></div>     
                     </nav>
                 </div>
+                <div class="jsil-content mdl-layout__content">
+                    <a name="top"></a>
     <div class="container">
         <br>
         <br>
