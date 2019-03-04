@@ -1,0 +1,738 @@
+
+    body {
+        margin: 0;
+        
+        font-size: 1em;
+    }
+
+    /* Disable ugly boxes around images in IE10 */
+    a img {
+        border: 0px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    ::-moz-selection {
+        background-color: #6ab344;
+        color: #fff;
+    }
+
+    ::selection {
+        background-color: #6ab344;
+        color: #fff;
+    }
+
+    .jsil-search-box .mdl-textfield__input {
+        color: whitesmoke;
+
+
+    }
+
+    .jsil-header .mdl-menu__container {
+        z-index: 50;
+        margin: 0 !important;
+    }
+
+
+    .mdl-textfield--expandable {
+        width: auto;
+    }
+
+    .jsil-fab {
+        position: absolute;
+        right: 20%;
+        bottom: -26px;
+        z-index: 3;
+        background: #64ffda !important;
+        color: black !important;
+    }
+
+    .jsil-mobile-title {
+        display: none !important;
+    }
+
+
+    .jsil-logo-image {
+        height: 90px;
+        width: 240px;
+    }
+
+
+    .jsil-header {
+        overflow: visible;
+        background-color: rgb(100, 53, 119);
+        height: 77px;
+    }
+
+    .jsil-header .material-icons {
+        color: whitesmoke !important;
+    }
+
+    .jsil-header .mdl-layout__drawer-button {
+        background: transparent;
+        color: whitesmoke;
+    }
+
+    .jsil-header .mdl-navigation__link {
+        color: whitesmoke;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .jsil-navigation-container {
+        /* Simple hack to make the overflow happen to the left instead... */
+        direction: rtl;
+        order: 1;
+        width: 500px;
+        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+            width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .jsil-navigation {
+        /* ... and now make sure the content is actually LTR */
+        direction: ltr;
+        justify-content: flex-end;
+        width: 800px;
+    }
+
+    .jsil-search-box.is-focused+.jsil-navigation-container {
+        opacity: 0;
+        width: 100px;
+    }
+
+
+    .jsil-navigation .mdl-navigation__link {
+        display: inline-block;
+        height: 60px;
+        line-height: 68px;
+        background-color: transparent !important;
+        border-bottom: 4px solid transparent;
+    }
+
+    .jsil-navigation .mdl-navigation__link:hover {
+        border-bottom: 4px solid rgb(211, 71, 94);
+    }
+
+    .jsil-search-box {
+        order: 2;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .jsil-more-button {
+        order: 3;
+    }
+
+
+    .jsil-drawer {
+        border-right: none;
+    }
+
+    .jsil-drawer-separator {
+        height: 1px;
+        background-color: #dcdcdc;
+        margin: 8px 0;
+    }
+
+    .jsil-drawer .mdl-navigation__link.mdl-navigation__link {
+        font-size: 14px;
+        color: #757575;
+    }
+
+    .jsil-drawer span.mdl-navigation__link.mdl-navigation__link {
+        color: rgb(94, 45, 114);
+        font-weight: bolder;
+    }
+
+    .jsil-drawer .mdl-layout-title {
+        position: relative;
+        background: rgb(94, 45, 114);
+        height: 160px;
+    }
+
+    .jsil-drawer .jsil-logo-image {
+        position: absolute;
+        bottom: 40px;
+        right: 0px;
+        text-align: center !important;
+    }
+
+    .jsil-be-together-section {
+        height: 700px;
+        width: auto;
+        background-color: #f3f3f3;
+        background: url('/static/images/rack3.jpg') center 30% no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .logo-font {
+        line-height: 1;
+        color: #767777;
+        font-weight: 500;
+    }
+
+    .jsil-slogan {
+        font-size: 30px;
+        padding-top: 80px;
+        color: whitesmoke !important;
+    }
+
+    .jsil-sub-slogan {
+        font-size: 25px;
+        padding-top: 24px;
+        font-weight: 900;
+        color: whitesmoke !important;
+    }
+
+    .jsil-create-character {
+        font-size: 21px;
+        padding-top: 400px;
+    }
+
+    .jsil-create-character a {
+        text-decoration: none;
+        color: #767777;
+        font-weight: 300;
+    }
+
+    .jsil-screen-section {
+        position: relative;
+        padding-top: 60px;
+        padding-bottom: 80px;
+    }
+
+    .jsil-screens {
+        text-align: right;
+        width: 100%;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+    .jsil-screen {
+        text-align: center;
+    }
+
+    .jsil-screen .jsil-link {
+        margin-top: 16px;
+        display: block;
+        z-index: 2;
+    }
+
+    .jsil-image-link {
+        text-decoration: none;
+    }
+
+    .jsil-wear {
+        display: inline-block;
+        width: 160px;
+        margin-right: 32px;
+    }
+
+    .jsil-wear .jsil-screen-image {
+        width: 40%;
+        z-index: 1;
+    }
+
+
+    .jsil-phone {
+        display: inline-block;
+        width: 64px;
+        margin-right: 48px;
+    }
+
+    .jsil-phone .jsil-screen-image {
+        width: 100%;
+        z-index: 1;
+    }
+
+
+    .jsil-tablet {
+        display: inline-block;
+        width: 110px;
+        margin-right: 64px;
+    }
+
+    .jsil-tablet .jsil-screen-image {
+        width: 100%;
+        z-index: 1;
+    }
+
+    .jsil-tablet .jsil-link {
+        display: block;
+        z-index: 2;
+    }
+
+
+    .jsil-tv {
+        display: inline-block;
+        width: 300px;
+        margin-right: 80px;
+    }
+
+    .jsil-tv .jsil-screen-image {
+        width: 100%;
+        z-index: 1;
+    }
+
+
+    .jsil-auto {
+        display: inline-block;
+        width: 300px;
+        overflow: hidden;
+    }
+
+    .jsil-auto .jsil-screen-image {
+        display: block;
+        height: 300px;
+        z-index: 1;
+    }
+
+
+    .jsil-wear-section {
+        position: relative;
+        background-size: cover;
+        height: 500px;
+    }
+
+    .jsil-wear-band {
+        position: absolute;
+        height: 300px;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: rgb(100, 53, 119);
+    }
+
+    .jsil-wear-band-text {
+        max-width: 800px;
+        margin-left: 25%;
+        padding: 24px;
+        text-align: left;
+        color: white;
+    }
+
+    .jsil-wear-band-text p {
+        padding-top: 8px;
+    }
+
+    .jsil-link {
+        text-decoration: none;
+        color: #8bc34a !important;
+    }
+
+    .jsil-link:hover {
+        color: #7cb342 !important;
+    }
+
+    .jsil-link .material-icons {
+        position: relative;
+        top: -1px;
+        vertical-align: middle;
+    }
+
+    .jsil-alt-link {
+        text-decoration: none;
+        color: #64ffda !important;
+        font-size: 16px;
+    }
+
+    .jsil-alt-link:hover {
+        color: #00bfa5 !important;
+    }
+
+    .jsil-alt-link .material-icons {
+        position: relative;
+        top: 6px;
+    }
+
+    .jsil-customized-section {
+        text-align: center;
+    }
+
+    .jsil-customized-section-text {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .jsil-more-section {
+        padding: 80px 0;
+        max-width: 1044px;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+
+    .jsil-more-section .jsil-section-title {
+        margin-left: 12px;
+        padding-bottom: 24px;
+    }
+
+
+    .jsil-card-container .mdl-card__media {
+        overflow: hidden;
+        background: transparent;
+    }
+
+    .jsil-card-container .mdl-card__media img {
+        width: 100%;
+    }
+
+    .jsil-card-container .mdl-card__title {
+        background: transparent;
+        height: auto;
+    }
+
+    .jsil-card-container .mdl-card__title-text {
+        color: rgb(211, 71, 94);
+        font-weight: bolder !important;
+        height: auto;
+    }
+
+    .jsil-card-container .mdl-card__supporting-text {
+        height: auto;
+        color: black;
+
+
+    }
+
+
+    .jsil-link-menu:hover {
+        cursor: pointer;
+    }
+
+
+    /**** Mobile layout ****/
+    @media (max-width: 900px) {
+        .jsil-navigation-container {
+            display: none;
+        }
+
+        .jsil-title {
+            display: none !important;
+        }
+
+        .jsil-mobile-title {
+            display: block !important;
+            position: absolute;
+            left: calc(50% - 70px);
+            top: 12px;
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
+            consecutive "+" operators in some cases. Therefore, we need to use both
+            here to cover all the bases. */
+        .jsil.jsil-search-box.is-focused~.jsil-mobile-title,
+        .jsil-search-box.is-focused+.jsil-navigation-container+.jsil-mobile-title {
+            opacity: 0;
+        }
+
+        .jsil-more-button {
+            display: none;
+        }
+
+        .jsil-search-box.is-focused {
+            width: calc(100% - 48px);
+        }
+
+        .jsil-search-box .mdl-textfield__expandable-holder {
+            width: 100%;
+        }
+
+        .jsil-be-together-section {
+            height: 350px;
+        }
+
+        .jsil-slogan {
+            font-size: 26px;
+            margin: 0 16px;
+            padding-top: 24px;
+        }
+
+        .jsil-sub-slogan {
+            font-size: 16px;
+            margin: 0 16px;
+            padding-top: 8px;
+        }
+
+        .jsil-create-character {
+            padding-top: 200px;
+            font-size: 16px;
+        }
+
+        .jsil-create-character img {
+            height: 12px;
+        }
+
+        .jsil-fab {
+            display: none;
+        }
+
+        .jsil-wear-band-text {
+            margin-left: 0;
+            padding: 16px;
+        }
+
+        .jsil-footer .mdl-mega-footer--bottom-section {
+            display: none;
+        }
+    }
+
+    section {
+        padding: 1em;
+        text-align: center;
+    }
+
+    .content {
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+
+    .content>h2 {
+        clear: both;
+        margin: 0;
+        padding: 4em 1% 0;
+        color: #484B54;
+        font-weight: 800;
+        font-size: 1.5em;
+    }
+
+    .content>h2:first-child {
+        padding-top: 0em;
+    }
+    /* Common style */
+    .thumbnail figure {
+        position: relative;
+        float: left;
+        overflow: hidden;
+        margin: 10px 1%;
+        min-width: 320px;
+        max-width: 480px;
+        max-height: 360px;
+        width: 48%;
+        height: auto;
+        background: #3085a3;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .thumbnail figure img {
+        position: relative;
+        display: block;
+        min-height: 100%;
+        max-width: 100%;
+        opacity: 0.8;
+    }
+
+    .thumbnail figure figcaption {
+        padding: 2em;
+        color: whitesmoke;
+        font-size: 1.30em;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .thumbnail figure figcaption::before,
+    .thumbnail figure figcaption::after {
+        pointer-events: none;
+    }
+
+    .thumbnail figure figcaption,
+    .thumbnail figure figcaption>a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Anchor will cover the whole item by default */
+    /* For some effects it will show as a button */
+    .thumbnail figure figcaption>a {
+        z-index: 1000;
+        text-indent: 200%;
+        white-space: nowrap;
+        font-size: 0;
+        opacity: 0;
+    }
+
+    .thumbnail figure h4 {
+        word-spacing: -0.15em;
+        font-weight: 300;
+    }
+
+    .thumbnail figure h4 span {
+        font-weight: 800;
+    }
+
+    .thumbnail figure h4,
+    .thumbnail figure p {
+        margin: 0;
+    }
+
+    .thumbnail figure p {
+        letter-spacing: 1px;
+        font-size: 68.5%;
+    }
+
+
+    figure.product-images figcaption {
+        padding: 1em;
+    }
+
+    figure.product-images figcaption::before,
+    figure.product-images figcaption::after {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        border-style: solid;
+        border-color: rgb(211, 71, 94);
+        content: '';
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+    }
+
+    figure.product-images figcaption::before {
+        right: 0;
+        bottom: 0;
+        border-width: 0 70px 60px 0;
+        -webkit-transform: translate3d(70px, 60px, 0);
+        transform: translate3d(70px, 60px, 0);
+    }
+
+    figure.product-images figcaption::after {
+        top: 0;
+        left: 0;
+        border-width: 15px 0 0 15px;
+        -webkit-transform: translate3d(-15px, -15px, 0);
+        transform: translate3d(-15px, -15px, 0);
+    }
+
+    figure.product-images img,
+    figure.product-images p a {
+        -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+        transition: opacity 0.35s, transform 0.35s;
+    }
+
+    figure.product-images img {
+        opacity: 0.85;
+    }
+
+    figure.product-images h4 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 0.4em 10px;
+        width: 50%;
+        -webkit-transition: -webkit-transform 0.35s;
+        transition: transform 0.35s;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+    }
+
+    @media screen and (max-width: 920px) {
+        figure.product-images h4 {
+            padding: 0.75em 10px;
+            font-size: 120%;
+        }
+    }
+
+    figure.product-images p {
+        float: right;
+        clear: both;
+        text-align: left;
+        text-transform: none;
+        font-size: 111%;
+    }
+
+    figure.product-images p a {
+        display: block;
+        margin-bottom: 1em;
+        color: #fff;
+        opacity: 0;
+        -webkit-transform: translate3d(90px, 0, 0);
+        transform: translate3d(90px, 0, 0);
+    }
+
+    figure.product-images p a:hover,
+    figure.product-images p a:focus {
+        color: rgb(94, 45, 114);
+    }
+
+    figure.product-images:hover figcaption::before,
+    figure.product-images:hover figcaption::after {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    figure.product-images:hover img {
+        opacity: 0.6;
+
+    }
+
+    figure.product-images:hover h4,
+    figure.product-images:hover p a {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    figure.product-images:hover p a {
+        opacity: 1;
+    }
+
+    figure.product-images:hover p a:first-child {
+        -webkit-transition-delay: 0.025s;
+        transition-delay: 0.025s;
+    }
+
+    figure.product-images:hover p a:nth-child(2) {
+        -webkit-transition-delay: 0.05s;
+        transition-delay: 0.05s;
+    }
+
+    figure.product-images:hover p a:nth-child(3) {
+        -webkit-transition-delay: 0.075s;
+        transition-delay: 0.075s;
+    }
+
+    figure.product-images:hover p a:nth-child(4) {
+        -webkit-transition-delay: 0.1s;
+        transition-delay: 0.1s;
+    }
+
+    .imagee {
+        width: 100% !important;
+    }
+
+    #eye:hover {
+        color: rgb(94, 45, 114) !important;
+
+    }
+
+
+
+
+    *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+    .clearfix:before, .clearfix:after { display: table; content: ''; }
+    .clearfix:after { clear: both; }
+    @import '../../src/material-design-lite';
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    #back_to_top {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        z-index: 900;
+    }
+
+    

@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{{ block.super }}
+{% load carton_tags %}
+{% get_cart as cart %}
+
+{% include 'navbar.html' %}
+<br>
+<br>
+<style>
+    .ctitle {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    * {
+        /* font-family: 'Pacifico', cursive; */
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .product-grid {
+        border-radius: 10px;
+
+    }
+
+    ul.dropdown-cart {
+        min-width: 250px;
+    }
+
+    ul.dropdown-cart li .item {
+        display: block;
+        padding: 3px 10px;
+        margin: 3px 0;
+    }
+
+    ul.dropdown-cart li .item:hover {
+        background-color: #f3f3f3;
+    }
+
+    ul.dropdown-cart li .item:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    ul.dropdown-cart li .item-left {
+        float: left;
+    }
+
+    ul.dropdown-cart li .item-left img,
+    ul.dropdown-cart li .item-left span.item-info {
+        float: left;
+    }
+
+    ul.dropdown-cart li .item-left span.item-info {
+        margin-left: 10px;
+    }
+
+    ul.dropdown-cart li .item-left span.item-info span {
+        display: block;
+    }
+
+    ul.dropdown-cart li .item-right {
+        float: right;
+    }
+
+    ul.dropdown-cart li .item-right button {
+        margin-top: 14px;
+    }
+
+    .fresh {
+        background-color: #27AE60;
+        color: white
+    }
+
+    .menu {
+        background-color: #EAEDED;
+        color: #333
+    }
+
+    .menu:hover {
+        color: #27AE60
+    }
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<div class="container">
+    <h3 style="background-color:#27AE60;color: white" class="h3 list-group-item list-group-item-action">
+        <i class="fas fa-list-alt"></i> order history
+    </h3>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <div class="list-group">
+                    <span style="background-color:#27AE60;color:white" href="#" class="text-center list-group-item">
+                        <i class="fab fa-buromobelexperte"></i> Menu
+                    </span>
+                    <a href="{% url 'space:cart' %}" class="list-group-item menu">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="badge badge-primary badge-pill fresh">
+                            {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
+                        </span>
+                    </a>
+                    <a href="{% url 'space:order_history' %}" class="list-group-item menu">
+                        <i class="fas fa-edit"></i> fridge Orders
+                    </a>
+                    <a href="" class="list-group-item menu">
+                        <i class="fas fa-shopping-basket"></i> smart Grocery
+                    </a>
+            
+              
+
+                </div><!-- /list-group -->
+            </div><!-- /col -->
+            <div class="col-xs-12 col-sm-9">
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-xs-12 col-sm-10" id="vegetables">
+                        {% if orders %} {% for order in orders %}
+                        <ul class="list-group">
+
+
+                            <a href="/jsil/orders/order_details/{{order.id}}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ order }}
+                                    <span class=""> {{ order.order_date }} </span>
+                                </li>
+                            </a>
+
+
+                        </ul>
+                        {% endfor %}
+                        {% else %}
+
+                            <div class="alert alert-dismissible alert-primary">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Oh snap!</strong> no orders made so far !
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+
+
+                    <div class="col-sm-1"></div>
+                    <!-- /col -->
+                </div>
+
+            </div><!-- /container -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

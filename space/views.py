@@ -22,22 +22,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # from .models import Thread, ChatMessage
 
 
+
+# django - carton 
+from carton.cart import Cart
+
+#
+from django.views import generic
+
+import csv
+
+
+
+
+
 from django.urls import reverse
 
 @login_required(login_url='/accounts/login/')
-def homepage(request):
+def home(request):
     products = Product.objects.all()
-    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
-    current_order_products = []
-    if filtered_orders.exists():
-    	user_order = filtered_orders[0]
-    	user_order_items = user_order.items.all()
-    	current_order_products = [product.product for product in user_order_items]
-
-    context = {
-        'products': products,
-        'current_order_products': current_order_products
-         }
     comments = Comment.objects.all()
     likes = Likes.objects.all()
     return render(request, 'home.html',locals())
@@ -109,12 +111,20 @@ def like(request, product_id):
 
     return redirect('homepage')
 
-def filter_by_category(request,category_id):
+
+
+def filter_by_category(request,name):
     '''
     Filters the database and displays products according to category_id
     '''
-    products = Product.filter_by_category(id = category_id)
+    products = Product.filter_by_category(name)
+    print(name)
+    print(products)
+
     return render(request,'category.html',{"products":products})
+
+
+
 
 def my_profile(request):
     my_user_profile = Profile.objects.filter(user=request.user).first()
@@ -122,47 +132,100 @@ def my_profile(request):
     context = { 'my_orders': my_orders }
     return render(request, "profile.html", context)
 
-@login_required()
-def order_details(request, **kwargs):
-    existing_order = get_user_pending_order(request)
-    context = {
-        'order': existing_order
-    }
-    return render(request, 'order_summary.html', context)
+def order_history (request):
+    '''
+    user will be taken to a page containig history of all order his/her fridge has made 
+    '''
+    orders = Order.objects.all()
+    return render( request , 'order-history.html' ,locals() )
+
+def order_details(request, item_id=None):
+    x = Order.objects.get(pk=item_id)
+    selected = Product.objects.filter(px__kx=x)
+    user = request.user
 
 
-@login_required()
-def add_to_cart(request, **kwargs):
-    # get the user profile
-    user_profile = get_object_or_404(Profile, user=request.user)
-    # filter products by id
-    product = Product.objects.filter(id=kwargs.get('item_id', "")).first()
-    # check if the user already owns this product
-    if product in request.user.profile.products.all():
-        messages.info(request, 'You already own this product')
-        return redirect(reverse('homepage')) 
-    # create orderItem of the selected product
-    order_item, status = OrderItem.objects.get_or_create(product=product)
-    # create order associated with the user
-    user_order, status = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
-    user_order.items.add(order_item)
-    if status:
-        # generate a reference code
-        user_order.ref_code = generate_order_id()
-        user_order.save()
 
-    # show confirmation message and redirect back to the same page
-    messages.info(request, "item added to cart")
-    return redirect(reverse('homepage'))
+    total = sum([i.price for i in selected])
+
+    # total = ( i.price for i in selected)
+    # print( total )
+    
+    return render(request, 'order-details.html', locals())
 
 
-@login_required()
-def delete_from_cart(request, item_id):
-    item_to_delete = OrderItem.objects.filter(pk=item_id)
-    if item_to_delete.exists():
-        item_to_delete[0].delete()
-        messages.info(request, "Item has been deleted")
-    return redirect(reverse('order_summary'))
+def add(request,item_id):
+
+    cart = Cart(request.session)
+
+    product = Product.objects.get(id=item_id)
+    print(product)
+
+    cart.add(product, price=product.price)
+
+    print(cart.items)
+
+    return redirect('space:category',name=product.category)
+
+
+def show(request):
+    cart = Cart(request.session)
+    products = Product.objects.all()
+    total=cart.total
+    # subtotal=cart.subtotal()
+
+    return render(request, 'cart.html', locals()) 
+
+def remove(request, item_id):
+    '''
+    Controller function for removing an item from the cart.
+    '''
+    cart = Cart(request.session)
+    product = Product.objects.get(id=item_id)
+    # cart.remove(product, price=product.selling_price)
+    cart.remove(product)
+    return render(request, 'cart.html', locals())
+
+
+def orders(request):
+    cart = Cart(request.session)
+
+    prods = [i.product for i in cart.items]
+
+    nk = Kart.objects.create()
+    for i in prods:
+        nk.product.add(i)
+
+    ordi = Order(cart=nk)
+    ordi.save()
+
+    # cart.clear()
+
+    return redirect(receipt)
+
+def receipt (request):
+    '''
+    a receipt provided to show order has been made successfully . also send the owner an sms
+    '''
+    cart = Cart(request.session)
+    user = request.user
+    products = ', '.join(i.product.name for i in cart.items)
+   
+
+    message = "Dear "+ user.username.upper() +", your order "+products.upper()+" KES:"+str( cart.total ) + \
+        " ,has been processed ! Kindly , authorize cashout ."
+
+    # send_receipt(message, customer_number)
+
+    return render (request , 'receipt.html' , locals())
+
+# @login_required()
+# def delete_from_cart(request, item_id):
+#     item_to_delete = OrderItem.objects.filter(pk=item_id)
+#     if item_to_delete.exists():
+#         item_to_delete[0].delete()
+#         messages.info(request, "Item has been deleted")
+#     return redirect(reverse('order_summary'))
 
 @login_required(login_url='/accounts/login/')
 def search_results(request):

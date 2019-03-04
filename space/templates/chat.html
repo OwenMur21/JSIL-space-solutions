@@ -51,7 +51,7 @@
                         <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
                             <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Search product by name">search</i>
                         </label>
-                        <form class="form" role="search" action="{% url 'search_results' %}">
+                        <form class="form" role="search" action="{% url 'space:search_results' %}">
                             <div class="mdl-textfield__expandable-holder">
                                 <input class="mdl-textfield__input" type="text" name="product" id="search-field">
                             </div>
@@ -62,7 +62,7 @@
                     <!-- Navigation -->
                     <div class="jsil-navigation-container">
                         <nav class="jsil-navigation mdl-navigation">
-                            <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'chat' %}">Chats&nbsp;<i class="fas fa-home"></i></a>
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'space:chat' %}">Chats&nbsp;<i class="fas fa-home"></i></a>
                             <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="#about">About Us</a>
                             
                             
@@ -85,7 +85,7 @@
                         </ul>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="">Contacts&nbsp;<i class="fas fa-phone"></i></a> 
                         <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="#payment">Payment Info</a>
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'my_profile' %}">Profile</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase"  style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;" href="{% url 'space:my_profile' %}">Profile</a>
                         
                     </nav>
                 </div>
@@ -107,7 +107,7 @@
                 <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
             </span>
             <nav class="mdl-navigation">
-                <a href="{% url 'chat' %}"><span class="mdl-navigation__link" style="font-size: 17px;">Chats&nbsp;<i class="fas fa-home"></i></span></a>
+                <a href="{% url 'space:chat' %}"><span class="mdl-navigation__link" style="font-size: 17px;">Chats&nbsp;<i class="fas fa-home"></i></span></a>
                 <div class="jsil-drawer-separator"></div>
                 
                 <span class="mdl-navigation__link" style="font-size: 17px;" href="">Our Products</span>
@@ -128,7 +128,7 @@
                 <div class="jsil-drawer-separator"></div>
                 <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;" href="#payment">Payment Info</span></a> 
                 <div class="jsil-drawer-separator"></div>
-                <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;" href="{% url 'my_profile' %}">Profile</span></a>     
+                <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;" href="{% url 'space:my_profile' %}">Profile</span></a>     
             </nav>
         </div>
         
@@ -176,7 +176,7 @@
         
         body {
             margin: 0;
-            font-family: 'Raleway', Arial, sans-serif !important;
+         
             font-size: 1em;
         }
         
@@ -197,7 +197,7 @@
         
         .jsil-search-box .mdl-textfield__input {
             color: whitesmoke;
-            font-family: 'Raleway', Arial, sans-serif !important;
+     
             
         }
         

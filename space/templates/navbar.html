@@ -1,0 +1,129 @@
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        
+        <div class="jsil-header mdl-layout__header mdl-layout__header--waterfall">
+            <div class="mdl-layout__header-row">
+                <span class="jsil-title mdl-layout-title">
+                    <a href="/"><img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg"></a>
+        
+                </span>
+                <div class="jsil-header-spacer mdl-layout-spacer"></div>
+                <div class="jsil-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="search-field">
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <!-- Navigation -->
+                <div class="jsil-navigation-container">
+                    <nav class="jsil-navigation mdl-navigation">
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;"
+                        href="{% url 'space:chat' %}">Chats&nbsp;<i class="fas fa-home"></i></a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;"
+                        href="#about" data-toggle="tooltip" data-placement="bottom" title="View about section">About Us</a>
+                        
+                        
+                        <!-- Right aligned menu below button -->
+                        <a id="demo-menu-lower-right" class="mdl-navigation__link mdl-typography--text-uppercase" data-toggle="tooltip" data-placement="bottom" title="View product categories" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;cursor: pointer !important;">Products</a>
+                        
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+                            
+                            <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">
+                                <a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                href="{% url 'space:category' name='Over the door shoe racks' %}">Over the door shoe racks</a>
+                            </li>
+                            
+                            <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                href="{% url 'space:category' name='Class room organizers' %}">Class room organizers</a></li>
+                                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                    href="{% url 'space:category' name='Office organizers' %}">Office organizers</a></li>
+                                    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                        href="{% url 'space:category' name='Wardrobe organizers' %}">Wardrobe organizers</a></li>
+                                        <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                            href="{% url 'space:category' name='Tool box' %}">Tool box</a></li>
+                                            <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                                href="{% url 'space:category' name='Bathroom organizers' %}">Bathroom organizers</a></li>
+                                                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                                    href="{% url 'space:category' name='Toilet paper holders' %}">Toilet paper holders</a></li>
+                                                    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                                        href="{% url 'space:category' name='Kitchen organizers' %}">Kitchen organizers</a></li>
+                                                        <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                                            href="{% url 'space:category' name='Car organizers' %}">Car organizers</a></li>
+                                                            <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a style="color:black;font-weight: bold;text-decoration-line: none;"
+                                                                href="{% url 'space:category' name='Car boot organizers' %}">Car boot organizers</a></li>
+                                                            </ul>
+                                                            <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;"
+                                                            href="">Contacts&nbsp;<i class="fas fa-phone"></i></a>
+                                                            <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;"
+                                                            href="#payment">Payment Info</a>
+                                                            <a class="mdl-navigation__link mdl-typography--text-uppercase" style="color:whitesmoke;text-decoration-line: none !important;font-size: 14.5px;"
+                                                            href="{% url 'space:my_profile' %}">Profile</a>
+                                                            
+                                                        </nav>
+                                                    </div>
+                                                    <span class="jsil-mobile-title mdl-layout-title">
+                                                        <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
+                                                    </span>
+                                                    <button class="jsil-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+                                                        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Account">more_vert</i>
+                                                    </button>
+                                                    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+                                                        <a href="/logout/" style="text-decoration-line: none !important;">
+                                                            <li class="mdl-menu__item">Logout</li>
+                                                        </a>
+                                                        <a href="/accounts/password/change/" style="text-decoration-line: none !important;">
+                                                            <li class="mdl-menu__item">Change Password</li>
+                                                        </a>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="jsil-drawer mdl-layout__drawer" >
+                                                <span class="mdl-layout-title" >
+                                                    <img class="jsil-logo-image" src="https://jsil.co.ke/img/jsil-shop-logo-1510834981.jpg">
+                                                </span>
+                                                <nav class="mdl-navigation">
+                                                    <a href="{% url 'space:chat' %}"><span class="mdl-navigation__link" style="font-size: 17px;">Chats&nbsp;<i
+                                                        class="fas fa-home"></i></span></a>
+                                                        <div class="jsil-drawer-separator"></div>
+                                                        
+                                                        <span class="mdl-navigation__link" style="font-size: 17px;" href="">Our Products</span>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Over the door shoe racks' %}">Over the door shoe racks</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Classroom organizers' %}">Classroom organizers</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Office organizers' %}">Office organizers</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Wardrobe organizers' %}">Wardrobe organizers</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Tool box' %}">Tool box</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Bathroom organizers' %}">Bathroom organizers</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Toilet paper holders' %}">Toilet paper holders</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Kitchen organizers' %}">Kitchen organizers</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Car organizers' %}">Car organizers</a>
+                                                        <a class="mdl-navigation__link" style="color:rgb(32, 32, 32);font-weight: 900;text-decoration-line: none !important;"
+                                                        href="{% url 'space:category' name='Car boot organizers' %}">Car boot organizers</a>
+                                                        <div class="jsil-drawer-separator"></div>
+                                                        <a href="#about"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;">About
+                                                            Us</span></a>
+                                                            <div class="jsil-drawer-separator"></div>
+                                                            <a href=""><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;"
+                                                                href="">Contacts</span></a>
+                                                                <div class="jsil-drawer-separator"></div>
+                                                                <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;"
+                                                                    href="#payment">Payment Info</span></a>
+                                                                    <div class="jsil-drawer-separator"></div>
+                                                                    <a href="#payment"><span class="mdl-navigation__link" style="font-size: 17px;text-decoration-line: none !important;"
+                                                                        href="{% url 'space:my_profile' %}">Profile</span></a>
+                                                                    </nav>
+                                                                </div>
+                                                                
+                                                                <div class="jsil-content mdl-layout__content">
+                                                                    <a name="top"></a>
