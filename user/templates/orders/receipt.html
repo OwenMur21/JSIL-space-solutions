@@ -6,8 +6,7 @@
 {% get_cart as cart %}
 
 {% include 'navbar.html' %}
-<br>
-<br>
+
 <style>
     .ctitle {
         font-family: 'Josefin Sans', sans-serif;
@@ -87,8 +86,8 @@
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="container">
-    <h3 style="background-color:#27AE60;color: white" class="h3 list-group-item list-group-item-action">
-        <i class="fas fa-list-alt"></i> order history
+    <h3 style="background-color:rgb(94, 45, 114);color: white" class="h3 list-group-item list-group-item-action">
+        <i class="far fa-file-alt"></i> Receipt
     </h3>
 
     <div class="container">
@@ -96,7 +95,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <div class="list-group">
-                    <span style="background-color:#27AE60;color:white" href="#" class="text-center list-group-item">
+                    <span style="background-color:rgb(94, 45, 114);color:white" href="#" class="text-center list-group-item">
                         <i class="fab fa-buromobelexperte"></i> Menu
                     </span>
                     <a href="{% url 'space:cart' %}" class="list-group-item menu">
@@ -105,15 +104,13 @@
                             {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
                         </span>
                     </a>
-                    <a href="{% url 'space:order_history' %}" class="list-group-item menu">
+                    <a href="{% url 'user:order_history' %}" class="list-group-item menu">
                         <i class="fas fa-edit"></i> fridge Orders
                     </a>
                     <a href="" class="list-group-item menu">
                         <i class="fas fa-shopping-basket"></i> smart Grocery
                     </a>
-            
-              
-
+         
                 </div><!-- /list-group -->
             </div><!-- /col -->
             <div class="col-xs-12 col-sm-9">
@@ -122,32 +119,27 @@
                     <div class="col-sm-1"></div>
 
                     <div class="col-xs-12 col-sm-10" id="vegetables">
-                        {% if orders %} {% for order in orders %}
+
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                             {{ message }}
+                             <!-- <a href="#" class="alert-link">  </a>. -->
+                        </div>
+
+
+                        {% if cart %} {% for item in cart.items %}
                         <ul class="list-group">
-
-
-                            <a href="/jsil/orders/order_details/{{order.id}}">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ order }}
-                                    <span class=""> {{ order.order_date }} </span>
-                                </li>
-                            </a>
-
-
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ item.product.name }}
+                                <span class=""> {{ item.quantity }} @ KES <strong>{{ item.product.price }}</strong> </span>
+                            </li>
                         </ul>
-                        {% endfor %}
-                        {% else %}
+                        {% endfor %}{% endif %}
 
-                            <div class="alert alert-dismissible alert-primary">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Oh snap!</strong> no orders made so far !
-                            </div>
-                        {% endif %}
-
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <p> Total Cost: KES <strong> {{ cart.total }} </strong> </p>
+                        </div>
                     </div>
-
-
-
 
                     <div class="col-sm-1"></div>
                     <!-- /col -->

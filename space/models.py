@@ -149,21 +149,6 @@ class Likes(models.Model):
       return self.who_liked
 
 
-class Kart(models.Model):
-    product = models.ManyToManyField(Product, related_name='px')
-
-    def __str__(self):
-        return f'{self.pk} cart'
-
-
-class Order(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE, related_name='order')
-    cart = models.ForeignKey(Kart, related_name="kx",
-                             on_delete=models.DO_NOTHING)
-    order_date = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f'{self.pk} Order'
 
 class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)

@@ -6,8 +6,6 @@
 {% get_cart as cart %}
 
 {% include 'navbar.html' %}
-
-
 <br>
 <br>
 <style>
@@ -74,7 +72,7 @@
     }
 
     .fresh {
-        background-color: #27AE60;
+        background-color:rgb(211, 71, 94) !important;
         color: white
     }
 
@@ -84,13 +82,13 @@
     }
 
     .menu:hover {
-        color: #27AE60
+        color: rgb(211, 71, 94) !important;
     }
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="container">
-    <h3 style="background-color:#27AE60;color: white" class="h3 list-group-item list-group-item-action">
-        <i class="far fa-file-alt"></i> Receipt
+    <h3 style="background-color:rgb(94, 45, 114);color: white" class="h3 list-group-item list-group-item-action">
+        order details <i class="far fa-edit"></i>
     </h3>
 
     <div class="container">
@@ -98,7 +96,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <div class="list-group">
-                    <span style="background-color:#27AE60;color:white" href="#" class="text-center list-group-item">
+                    <span style="background-color:rgb(94, 45, 114);color:white" href="#" class="text-center list-group-item">
                         <i class="fab fa-buromobelexperte"></i> Menu
                     </span>
                     <a href="{% url 'space:cart' %}" class="list-group-item menu">
@@ -107,7 +105,7 @@
                             {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
                         </span>
                     </a>
-                    <a href="{% url 'space:order_history' %}" class="list-group-item menu">
+                    <a href="{% url 'user:order_history' %}" class="list-group-item menu">
                         <i class="fas fa-edit"></i> fridge Orders
                     </a>
                     <a href="" class="list-group-item menu">
@@ -122,25 +120,17 @@
                     <div class="col-sm-1"></div>
 
                     <div class="col-xs-12 col-sm-10" id="vegetables">
-
-                        <div class="alert alert-dismissible alert-success">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                             {{ message }}
-                             <!-- <a href="#" class="alert-link">  </a>. -->
-                        </div>
-
-
-                        {% if cart %} {% for item in cart.items %}
+                        {% if selected %} {% for item in selected %}
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ item.product.name }}
-                                <span class=""> {{ item.quantity }} @ KES <strong>{{ item.product.price }}</strong> </span>
+                                {{ item }}
+                                <span class=""> {{ item.quantity }} @   KES <strong>{{ item.price }}</strong> </span>
                             </li>
                         </ul>
                         {% endfor %}{% endif %}
 
                         <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <p> Total Cost: KES <strong> {{ cart.total }} </strong> </p>
+                            <p> Total Cost: KES <strong> {{ total }} </strong> </p>
                         </div>
                     </div>
 

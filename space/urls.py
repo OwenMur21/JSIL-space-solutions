@@ -19,15 +19,6 @@ urlpatterns=[
 
   url(r'^add-to-cart/(?P<item_id>\d+)/$', views.add, name='add_to_cart'),
 
-  url(r'^jsil/orders/history$', views.order_history, name='order_history'),
-
-  url(r'^proceed/order/$', views.orders, name='orders'),
-
-  url(r'^jsil/orders/order_details/(\d+)$', views.order_details, name='order_details'),
-
-
-  url(r'^jsil/receipt/$', views.receipt, name='receipt'),
-
   # url(r'^item/delete/(?P<item_id>[-\w]+)/$', views.delete_from_cart, name='delete_item'),
   url(r'^shoppingcart/remove/(?P<item_id>\d+)/$',views.remove,name='remove_from_cart'),
   url(r'^home/$', views.Home, name='chat'),

@@ -6,6 +6,9 @@
 {% get_cart as cart %}
 
 {% include 'navbar.html' %}
+
+<br>
+<br>
 <style>
     .ctitle {
         font-family: 'Josefin Sans', sans-serif;
@@ -70,7 +73,7 @@
     }
 
     .fresh {
-        background-color: #27AE60;
+        background-color: rgb(211, 71, 94) !important;
         color: white
     }
 
@@ -80,13 +83,13 @@
     }
 
     .menu:hover {
-        color: #27AE60
+        color: rgb(211, 71, 94) !important
     }
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="container">
-    <h3 style="background-color:#27AE60;color: white" class="h3 list-group-item list-group-item-action">
-        order details <i class="far fa-edit"></i>
+    <h3 style="background-color:rgb(94, 45, 114);color: white" class="h3 list-group-item list-group-item-action">
+        <i class="fas fa-list-alt"></i> order history
     </h3>
 
     <div class="container">
@@ -94,7 +97,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <div class="list-group">
-                    <span style="background-color:#27AE60;color:white" href="#" class="text-center list-group-item">
+                    <span style="background-color:rgb(94, 45, 114);color:white" href="#" class="text-center list-group-item">
                         <i class="fab fa-buromobelexperte"></i> Menu
                     </span>
                     <a href="{% url 'space:cart' %}" class="list-group-item menu">
@@ -103,13 +106,12 @@
                             {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
                         </span>
                     </a>
-                    <a href="{% url 'space:order_history' %}" class="list-group-item menu">
+                    <a href="{% url 'user:order_history' %}" class="list-group-item menu">
                         <i class="fas fa-edit"></i> fridge Orders
                     </a>
                     <a href="" class="list-group-item menu">
                         <i class="fas fa-shopping-basket"></i> smart Grocery
                     </a>
-
 
                 </div><!-- /list-group -->
             </div><!-- /col -->
@@ -119,22 +121,59 @@
                     <div class="col-sm-1"></div>
 
                     <div class="col-xs-12 col-sm-10" id="vegetables">
-                        {% if selected %} {% for item in selected %}
+                        {% if orders %} {% for order in orders %}
                         <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ item }}
-                                <span class=""> {{ item.quantity }} @   KES <strong>{{ item.price }}</strong> </span>
-                            </li>
-                        </ul>
-                        {% endfor %}{% endif %}
 
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <p> Total Cost: KES <strong> {{ total }} </strong> </p>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <p> Order by: {{user.username}}</p>
-                        </div>
+
+                            <a href="/space/orders/order_details/{{order.id}}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ order }}
+                                    <span class=""> {{ order.order_date }} </span>
+                                </li>
+                            </a>
+
+
+                        </ul>
+                        {% endfor %}
+                        {% else %}
+
+                            <div class="alert alert-dismissible alert-primary">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Oh snap!</strong> no orders made so far !
+                            </div>
+                        {% endif %}
+
                     </div>
+
+                    <!-- .modal showing order details -->
+
+
+                    <!-- <a href="/orders/order/{{order.id}}" data-toggle="modal" data-target="#order_details"> -->
+
+                    <!-- <div class="modal fade" id="order_details" tabindex="-1" role="dialog" aria-labelledby="project-add-modal" aria-hidden="true" >
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"> Order Details <i class="far fa-list-alt" ></i> </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p> 
+                                        {% for item in selected %}
+                                            {{ item }}
+                                        {% endfor  %}
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- ./end of modal -->
+
 
                     <div class="col-sm-1"></div>
                     <!-- /col -->

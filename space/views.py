@@ -28,6 +28,7 @@ from carton.cart import Cart
 
 #
 from django.views import generic
+from multiprocessing import Process
 
 import csv
 
@@ -132,27 +133,6 @@ def my_profile(request):
     context = { 'my_orders': my_orders }
     return render(request, "profile.html", context)
 
-def order_history (request):
-    '''
-    user will be taken to a page containig history of all order his/her fridge has made 
-    '''
-    orders = Order.objects.all()
-    return render( request , 'order-history.html' ,locals() )
-
-def order_details(request, item_id=None):
-    x = Order.objects.get(pk=item_id)
-    selected = Product.objects.filter(px__kx=x)
-    user = request.user
-
-
-
-    total = sum([i.price for i in selected])
-
-    # total = ( i.price for i in selected)
-    # print( total )
-    
-    return render(request, 'order-details.html', locals())
-
 
 def add(request,item_id):
 
@@ -182,50 +162,9 @@ def remove(request, item_id):
     '''
     cart = Cart(request.session)
     product = Product.objects.get(id=item_id)
-    # cart.remove(product, price=product.selling_price)
     cart.remove(product)
     return render(request, 'cart.html', locals())
 
-
-def orders(request):
-    cart = Cart(request.session)
-
-    prods = [i.product for i in cart.items]
-
-    nk = Kart.objects.create()
-    for i in prods:
-        nk.product.add(i)
-
-    ordi = Order(cart=nk)
-    ordi.save()
-
-    # cart.clear()
-
-    return redirect(receipt)
-
-def receipt (request):
-    '''
-    a receipt provided to show order has been made successfully . also send the owner an sms
-    '''
-    cart = Cart(request.session)
-    user = request.user
-    products = ', '.join(i.product.name for i in cart.items)
-   
-
-    message = "Dear "+ user.username.upper() +", your order "+products.upper()+" KES:"+str( cart.total ) + \
-        " ,has been processed ! Kindly , authorize cashout ."
-
-    # send_receipt(message, customer_number)
-
-    return render (request , 'receipt.html' , locals())
-
-# @login_required()
-# def delete_from_cart(request, item_id):
-#     item_to_delete = OrderItem.objects.filter(pk=item_id)
-#     if item_to_delete.exists():
-#         item_to_delete[0].delete()
-#         messages.info(request, "Item has been deleted")
-#     return redirect(reverse('order_summary'))
 
 @login_required(login_url='/accounts/login/')
 def search_results(request):
