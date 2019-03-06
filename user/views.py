@@ -60,7 +60,7 @@ def receipt (request):
 
 def order_history (request):
     '''
-    user will be taken to a page containig history of all order his/her fridge has made 
+    user will be taken to a page containig history of all orders he/she has made 
     '''
     orders = Order.objects.all()
     return render( request , 'orders/history.html' ,locals() )
