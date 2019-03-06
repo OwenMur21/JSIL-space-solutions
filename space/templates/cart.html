@@ -12,102 +12,141 @@
 
 
 <style>
-  
+    
     * {
         /* font-family: 'Pacifico', cursive; */
         font-family: 'Josefin Sans', sans-serif;
     }
+    .fresh {
+        background-color: rgb(211, 71, 94) !important;
+        color: white;
+        font-size: 14px;
+    }
+
+    
+    .menu {
+        background-color: #EAEDED;
+        color: #333
+    }
+    
+    .menu:hover {
+        color: rgb(211, 71, 94);
+    }
 </style>
 {% include 'navbar.html' %}
+<div class="container-fluid">
+    <div class="container">
+        <h3 style="background-color:rgb(94, 45, 114);color: white;font-family: 'Josefin Sans', sans-serif;" class="h3 list-group-item list-group-item-action">
+            Your Cart <i class="fas fa-shopping-cart"></i>
+        </h3>
+        <div class="row">
+                <div class="col-xs-12 col-sm-3">
+                        <div class="list-group">
+                            <span style="background-color:rgb(94, 45, 114);color:white" href="#" class="list-group-item text-center menu">
+                                <i class="fab fa-buromobelexperte"></i> Menu
+                            </span>
+                            <a href="{% url 'space:cart' %}" class="list-group-item menu">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                                <span class="badge badge-primary badge-pill fresh">
+                                    {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
+                                </span>
+                            </a>
+                            <a href="{% url 'user:order_history' %}" class="list-group-item menu">
+                                <i class="fas fa-edit"></i> Order History
+                            </a>
+                            <a href="" class="list-group-item menu">
+                                <i class="fas fa-shopping-basket"></i> Available Products
+                            </a>
+                            
+                        </div><!-- /list-group -->
+                    </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-8">
+                <table class="table table-hover">
+                    
+                    <thead>
+                        
+                        <tr style="background-color:rgb(94, 45, 114);color: white">
+                            <br>
+                            <th>Product</th>
+                          
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Price</th>
 
-<div class="container">
-    <h3 style="background-color:rgb(94, 45, 114);color: white" class="h3 list-group-item list-group-item-action">
-        Your Cart <i class="fas fa-shopping-cart"></i>
-    </h3>
-    <div class="row">
-
-        <div class="col-sm-12 col-md-8 col-md-offset-2">
-            <table class="table table-hover">
-
-                <thead>
-
-                    <tr style="background-color:rgb(94, 45, 114);color: white">
-                        <br>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {% for item in cart.items %}
-
-                    <tr>
-
-                        <td class="col-sm-12 col-md-4 col-xs-12">
-
-                            <div class="media">
-
-                                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{ item.product.post.url }}"> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a style="color:rgb(94, 45, 114);;" href="#">{{ item.product.name }}</a></h4>
-                                    <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for item in cart.items %}
+                        
+                        <tr>
+                            
+                            <td class="col-sm-12 col-md-4 col-xs-12">
+                                
+                                <div class="media">
+                                    
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{ item.product.post.url }}"> </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a style="color:rgb(94, 45, 114);;" href="#">{{ item.product.name }}</a></h4>
+                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>KSh {{ item.product.price }}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>KSh {{ item.subtotal }}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button style="background-color:rgb(211, 71, 94);" type="button" class="btn btn-success">
-                                <a style="color:white;" href="/shoppingcart/remove/{{ item.product.id }}">
-                                    <span class="glyphicon glyphicon-remove"></span> Remove
-                                </a>
-                            </button></td>
-                    </tr>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
 
-                    {%endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                            <h5>Subtotal</h5>
-                            <h3>Total</h3>
-                        </td>
-                        <td class="text-right">
-                            <h5>
-                                <strong>KSh {{total}}<br></strong>
-                                <br>
-
-                            </h5>
-                            <h3>{{total}}</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                            <a type="button" href="{% url 'space:home' %}" class="btn btn-default">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                            </a></td>
-                        <td>
-                            <button type="button" class="btn btn-success">
-                                <a href="">
-                                    Checkout <span class="glyphicon glyphicon-play"></span>
-                                </a>
-                            </button></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
-</div>
-<style>
-    
-</style>
-{% endblock %}
+                            <td class="col-sm-1 col-md-1 text-center"><strong>KSh {{ item.product.price }}</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>KSh {{ item.subtotal }}</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <button style="background-color:rgb(211, 71, 94);" type="button" class="btn btn-success">
+                                    <a style="color:white;" href="/shoppingcart/remove/{{ item.product.id }}">
+                                        <span class="glyphicon glyphicon-remove"></span> Remove
+                                    </a>
+                                </button></td>
+                            </tr>
+                            
+                            {%endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>
+                                    <h4 style="font-family: 'Josefin Sans', sans-serif;">Total</h4>
+                                    <br>
+                                </td>
+                                <td class="">
+                                    <h4>
+                                        <strong>KSh {{total}}<br></strong>
+                                        <br>
+                                        
+                                    </h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>
+                                    <a type="button" href="{% url 'space:home' %}" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                                    </a></td>
+                                    <td>
+                                        <button type="button" style="background-color:rgb(211, 71, 94);height:36px;border-radius:5px;">
+                                            <a href="" style="color:whitesmoke;">
+                                                Checkout <span class="glyphicon glyphicon-play"></span>
+                                            </a>
+                                        </button></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                
+            </style>
+            {% endblock %}
