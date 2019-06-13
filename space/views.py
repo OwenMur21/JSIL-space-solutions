@@ -25,6 +25,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # django - carton 
 from carton.cart import Cart
+from django_daraja.mpesa.core import MpesaClient
 
 #
 from django.views import generic
@@ -134,7 +135,20 @@ def my_profile(request):
     return render(request, "profile.html", context)
 
 
-def add(request,item_id):
+def stk_push_callback(request):
+        data = request.body
+        cart = Cart(request.session)
+
+        product = Product.objects.get(id=item_id)
+        print(product)
+
+        cart.add(product, price=product.price)
+
+        print(cart.items)
+
+        return redirect('space:category',name=product.category)
+
+def add_to_cart(request,item_id):
 
     cart = Cart(request.session)
 
@@ -155,6 +169,19 @@ def show(request):
     # subtotal=cart.subtotal()
 
     return render(request, 'cart.html', locals()) 
+def order_details(request, item_id=None):
+    x = Order.objects.get(pk=item_id)
+    selected = Product.objects.filter(px__kx=x)
+
+    print ( [i.price for i in selected] )
+
+    total = sum([i.price for i in selected])
+
+    # total = ( i.price for i in selected)
+    # print( total )
+    
+    return render(request, 'orders/see_more.html', locals())
+
 
 def remove(request, item_id):
     '''
@@ -203,3 +230,15 @@ def Post(request):
 def Messages(request):
     c = Chat.objects.all()
     return render(request, 'messages.html', {'chat': c})
+
+def push(request):
+   cl = MpesaClient()
+
+   phone_number = '0711419032'
+   amount = 1
+   account_reference = 'JSIL Space Solutions'
+   transaction_desc = 'Test Description'
+   callback_url = 'https://4a83e24a.ngrok.io/http://127.0.0.1:8000/daraja/stk-push'
+   response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+   print(response)
+   return HttpResponse(response.text)

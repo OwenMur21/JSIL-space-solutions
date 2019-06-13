@@ -17,7 +17,7 @@ urlpatterns=[
   url(r'^profile/$', views.my_profile, name='my_profile'),
 
 
-  url(r'^add-to-cart/(?P<item_id>\d+)/$', views.add, name='add_to_cart'),
+  # url(r'^add-to-cart/(?P<item_id>\d+)/$', views.add, name='add_to_cart'),
 
   # url(r'^item/delete/(?P<item_id>[-\w]+)/$', views.delete_from_cart, name='delete_item'),
   url(r'^shoppingcart/remove/(?P<item_id>\d+)/$',views.remove,name='remove_from_cart'),
@@ -29,6 +29,12 @@ urlpatterns=[
   url(r'^cart/$',views.show,name='cart'),
 
   # url(r'^checkout/$', views.checkout, name='checkout'),
+  url(r'^order-summary/$', views.order_details, name="order_summary"),
+  url(r'^add-to-cart/(?P<item_id>[-\w]+)/$', views.add_to_cart, name="add_to_cart"),
+  # url(r'^item/delete/(?P<item_id>[-\w]+)/$', views.delete_from_cart, name='delete_item'),
+  # url(r'^checkout/$', views.checkout, name='checkout'),
+  url(r'^daraja/stk-push', views.stk_push_callback, name='mpesa_stk_push_callback'),
+  url(r'^cart/daraja/push', views.push, name='push_callback'),
 
 
 ]
